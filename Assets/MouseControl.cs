@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MouseControl : MonoBehaviour
 {
 
-    public float sensitivity = 100f; // Mouse sensitivity
+    public float sensitivity = 100f; // Mouse Sensitivity
+    public Slider SensitivitySlide;  // Mouse Sensitivity Slider
     public Transform player;
+    private bool lockstate;          // Bool state on whether mouse is locked or not
     float rotationX = 0f;
 
     // Start is called before the first frame update
@@ -14,6 +17,12 @@ public class MouseControl : MonoBehaviour
     {
         // Lock the cursor
         Cursor.lockState = CursorLockMode.Locked;
+        this.lockstate = true;
+    }
+
+    public void Sensitivity(float val)
+    {
+        sensitivity = val;
     }
 
     // Update is called once per frame
@@ -27,7 +36,27 @@ public class MouseControl : MonoBehaviour
         rotationX = Mathf.Clamp(rotationX, -90f, 90f);
 
         // Move Camera on Y axis or player model on X axis
-        transform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
-        player.Rotate(Vector3.up * mouseX);
+        if (this.lockstate)
+        {
+            transform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
+            player.Rotate(Vector3.up * mouseX);
+        }
+
+        // Pause/Unpause on Esc key
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            if (this.lockstate)
+            {
+                this.lockstate = false;
+                Cursor.lockState = CursorLockMode.None;
+                SensitivitySlide.gameObject.SetActive(true);
+            }
+            else
+            {
+                this.lockstate = true;
+                Cursor.lockState = CursorLockMode.Locked;
+                SensitivitySlide.gameObject.SetActive(false);
+            }
+        }
     }
 }
