@@ -8,6 +8,7 @@ public class Item : MonoBehaviour
     public bool pickable = true;
     public bool storeable = false;
 
+    internal new Rigidbody rigidbody;
     void Awake()
     {
         // adds this item to the static items list when it is created
@@ -23,7 +24,11 @@ public class Item : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        rigidbody = GetComponent<Rigidbody>();
+        if (!rigidbody) {
+            rigidbody = gameObject.AddComponent<Rigidbody>();
+        }
+        rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
     }
 
     // Update is called once per frame
