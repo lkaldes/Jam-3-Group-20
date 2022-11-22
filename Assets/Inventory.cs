@@ -5,8 +5,16 @@ using UnityEngine;
 #nullable enable
 public class Inventory : MonoBehaviour
 {
-    public List<Item> items = new();
-    
+    private readonly List<Item> items = new();
+
+    public int Count
+    {
+        get
+        {
+            return items.Count;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +27,7 @@ public class Inventory : MonoBehaviour
         
     }
 
-    public Item? ItemAt(int index)
+    public Item? GetItemAt(int index)
     {
         if (index >= 0 && index < items.Count)
         {
@@ -55,5 +63,15 @@ public class Inventory : MonoBehaviour
         {
             items.RemoveAt(index);
         }
+    }
+
+    public List<Item> GetItems()
+    {
+        return items;
+    }
+
+    public void Clear()
+    {
+        items.Clear();
     }
 }
