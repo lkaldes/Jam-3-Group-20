@@ -8,6 +8,7 @@ public class MouseControl : MonoBehaviour
 
     public float sensitivity = 100f; // Mouse Sensitivity
     public Slider SensitivitySlide;  // Mouse Sensitivity Slider
+    public GameObject Crosshair;     //Crosshair
     public Transform player;
     private bool lockstate;          // Bool state on whether mouse is locked or not
     float rotationX = 0f;
@@ -50,12 +51,14 @@ public class MouseControl : MonoBehaviour
                 this.lockstate = false;
                 Cursor.lockState = CursorLockMode.None;
                 SensitivitySlide.gameObject.SetActive(true);
+                Crosshair.SetActive(false);
             }
             else
             {
                 this.lockstate = true;
                 Cursor.lockState = CursorLockMode.Locked;
                 SensitivitySlide.gameObject.SetActive(false);
+                Crosshair.SetActive(true);
             }
         }
     }
