@@ -977,7 +977,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickable: 1
-  storeable: 0
+  storeable: 1
 --- !u!65 &945177819
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1143,6 +1143,7 @@ MonoBehaviour:
   holdDistance: 5
   holdBreakForce: 1000
   pickUpInput: Fire1
+  storeInput: Fire2
   pickMode: 1
   debug: 0
   debugSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
@@ -2229,7 +2230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickable: 1
-  storeable: 0
+  storeable: 1
 --- !u!65 &2119266642
 BoxCollider:
   m_ObjectHideFlags: 0
