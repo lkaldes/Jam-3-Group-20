@@ -8,6 +8,18 @@ public class Item : MonoBehaviour
     public bool pickable = true;
     public bool storeable = false;
 
+    public bool Active
+    {
+        get
+        {
+            return gameObject.activeSelf;
+        }
+        set
+        {
+            SetActive(value);
+        }
+    }
+
     internal new Rigidbody rigidbody;
     void Awake()
     {
@@ -35,5 +47,13 @@ public class Item : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SetActive(bool active = true)
+    {
+        if (gameObject.activeSelf != active)
+        {
+            gameObject.SetActive(active);
+        }
     }
 }
