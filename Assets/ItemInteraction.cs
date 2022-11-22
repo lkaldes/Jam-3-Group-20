@@ -37,6 +37,18 @@ public class ItemInteraction : MonoBehaviour
     private Vector3 screenCenter = new Vector3((float)Screen.width / 2f, (float)Screen.height / 2f, 0);
     public Mesh? debugHoldMesh;
 
+    public Vector3 HoldPosition
+    {
+        get
+        {
+            if (camera != null)
+            {
+                return camera.ScreenToWorldPoint(screenCenter + Vector3.forward * holdDistance);
+            }
+            return Vector3.zero;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -86,44 +98,13 @@ public class ItemInteraction : MonoBehaviour
             return;
         }
 
-        Item? closestItem = null;
-        float closestScreenDistance = 0;
-        Vector3? closestScreenPosition = null;
-
-        if (pickMode == PickModes.ScreenDistance) 
+        if (inventory != null && inventory.Open)
         {
-            foreach (Item item in Item.items) 
-            {
-                Transform transform = item.transform;
-                Vector3 screenPosition = camera.WorldToScreenPoint(transform.position);
-                screenPosition.z = 0;
-                float screenDistance = (screenPosition - screenCenter).sqrMagnitude;
-
-                float worldDistance = (transform.position - this.transform.position).magnitude;
-
-                if (item.pickable && item.Active && worldDistance < maxPickDistance && screenDistance < maxScreenDistance && (!closestItem || screenDistance < closestScreenDistance)) 
-                {
-                    closestItem = item;
-                    closestScreenDistance = screenDistance;
-                    closestScreenPosition = screenPosition;
-                }
-            }
+            return;
         }
-        else if(pickMode == PickModes.Raycast)
-        {
-            Ray ray = camera.ScreenPointToRay(screenCenter);
-            if (Physics.Raycast(ray, out RaycastHit raycastHit, maxPickDistance))
-            {
-                Item itemComponent = raycastHit.collider.gameObject.GetComponent<Item>();
-                if (raycastHit.collider && itemComponent && itemComponent.pickable && itemComponent.Active)
-                {
-                    Vector3 screenPosition = camera.WorldToScreenPoint(raycastHit.collider.gameObject.transform.position);
-                    screenPosition.z = 0;
-                    closestScreenPosition = screenPosition;
-                    closestItem = itemComponent;
-                }
-            }
-        }
+
+        // get the closest pickable item
+        Item? closestItem = GetClosestItem();
         
 
         // check for pick up button
@@ -174,23 +155,21 @@ public class ItemInteraction : MonoBehaviour
         // this will make the item rotate with the player
         holdBody.rotation = gameObject.transform.rotation;
 
-
+        
 
         // debug display if enabled
         if (debug) 
         {
             if (debugObject != null && debugImage != null) 
             {
-                if (closestItem && !heldItem) 
+                if (closestItem != null && !heldItem) 
                 {
                     if (!debugObject.activeSelf) 
                     {
                         debugObject.SetActive(true);
                     }
-                    if (closestScreenPosition != null) 
-                    {
-                        debugImage.transform.position = (Vector3)closestScreenPosition;
-                    }
+                    Vector3 closestScreenPosition = camera.WorldToScreenPoint(closestItem.transform.position);
+                    debugImage.transform.position = closestScreenPosition;
                 } 
                 else 
                 {
@@ -223,43 +202,88 @@ public class ItemInteraction : MonoBehaviour
         }
     }
 
-    void PickUp(Item item) 
+    public void PickUp(Item item) 
     {       
         if (heldItem != null)
         {
-            heldItem.rigidbody.useGravity = true;
+            Drop();
         }
 
         heldItem = item;
-        heldItem.rigidbody.useGravity = false;
+        heldItem.SetGravity(false);
         if (holdObject != null) 
         {
-            holdObject.transform.position = heldItem.rigidbody.position;
+            holdObject.transform.position = heldItem.Position;
             holdJoint = holdObject.AddComponent<FixedJoint>();
             holdJoint.breakForce = holdBreakForce;
             holdJoint.connectedBody = heldItem.rigidbody;
         }   
     }
 
-    void Drop()
+    public void Drop()
     {
         if (heldItem != null)
         {
-            heldItem.rigidbody.velocity = Vector3.zero;
+            heldItem.SetVelocity(Vector3.zero);
             // heldItem.rigidbody.velocity = holdBody.velocity.normalized * Mathf.Min(20f, 2f * holdBody.velocity.magnitude / Time.fixedDeltaTime);
-            heldItem.rigidbody.useGravity = true;
+            heldItem.SetGravity(true);
             heldItem = null;
             Destroy(holdJoint);
         }
     }
 
-    void Store(Item item)
+    public void Store(Item item)
     {
         if (inventory != null)
         {
             Drop();
-            item.SetActive(false);
+            // item.SetActive(false);
             inventory.AddItem(item);
         }
+    }
+
+    private Item? GetClosestItem()
+    {
+        if (camera == null)
+        {
+            return null;
+        }
+
+        Item? closestItem = null;
+        float closestScreenDistance = 0;
+
+        if (pickMode == PickModes.ScreenDistance) 
+        {
+            foreach (Item item in Item.items) 
+            {
+                Transform transform = item.transform;
+                Vector3 screenPosition = camera.WorldToScreenPoint(transform.position);
+                screenPosition.z = 0;
+                float screenDistance = (screenPosition - screenCenter).sqrMagnitude;
+
+                float worldDistance = (transform.position - this.transform.position).magnitude;
+
+                if (item.pickable && item.Active && worldDistance < maxPickDistance && screenDistance < maxScreenDistance && (!closestItem || screenDistance < closestScreenDistance)) 
+                {
+                    closestItem = item;
+                    closestScreenDistance = screenDistance;
+                }
+            }
+        }
+        else if(pickMode == PickModes.Raycast)
+        {
+            Ray ray = camera.ScreenPointToRay(screenCenter);
+            if (Physics.Raycast(ray, out RaycastHit raycastHit, maxPickDistance))
+            {
+                Item itemComponent = raycastHit.collider.gameObject.GetComponent<Item>();
+                if (raycastHit.collider && itemComponent && itemComponent.pickable && itemComponent.Active)
+                {
+                    Vector3 screenPosition = camera.WorldToScreenPoint(raycastHit.collider.gameObject.transform.position);
+                    screenPosition.z = 0;
+                    closestItem = itemComponent;
+                }
+            }
+        }
+        return closestItem;
     }
 }
