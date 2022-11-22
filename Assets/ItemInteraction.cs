@@ -13,12 +13,15 @@ public class ItemInteraction : MonoBehaviour
     public float holdDistance = 5f;
     public float holdBreakForce = 1000f;
     public string pickUpInput = "Fire1";
+    public string storeInput = "Fire2";
     public enum PickModes
     {
         ScreenDistance,
         Raycast
     }
     public PickModes pickMode = PickModes.ScreenDistance;
+
+    private Inventory? inventory;
 
     public bool debug = true;
     private GameObject? debugObject;
@@ -47,6 +50,12 @@ public class ItemInteraction : MonoBehaviour
         holdBody.useGravity = false;
         holdBody.detectCollisions = false;
         holdBody.freezeRotation = true;
+
+        Inventory? inventoryComponent = GetComponent<Inventory>();
+        if (inventoryComponent)
+        {
+            inventory = inventoryComponent;
+        }
         
         if (debugHoldMesh)
         {
@@ -92,7 +101,7 @@ public class ItemInteraction : MonoBehaviour
 
                 float worldDistance = (transform.position - this.transform.position).magnitude;
 
-                if (item.pickable && worldDistance < maxPickDistance && screenDistance < maxScreenDistance && (!closestItem || screenDistance < closestScreenDistance)) 
+                if (item.pickable && item.Active && worldDistance < maxPickDistance && screenDistance < maxScreenDistance && (!closestItem || screenDistance < closestScreenDistance)) 
                 {
                     closestItem = item;
                     closestScreenDistance = screenDistance;
@@ -106,7 +115,7 @@ public class ItemInteraction : MonoBehaviour
             if (Physics.Raycast(ray, out RaycastHit raycastHit, maxPickDistance))
             {
                 Item itemComponent = raycastHit.collider.gameObject.GetComponent<Item>();
-                if (raycastHit.collider && itemComponent && itemComponent.pickable)
+                if (raycastHit.collider && itemComponent && itemComponent.pickable && itemComponent.Active)
                 {
                     Vector3 screenPosition = camera.WorldToScreenPoint(raycastHit.collider.gameObject.transform.position);
                     screenPosition.z = 0;
@@ -129,6 +138,18 @@ public class ItemInteraction : MonoBehaviour
             else
             {
                 Drop();
+            }
+        }
+
+        if (Input.GetButtonDown(storeInput))
+        {
+            if (heldItem != null && heldItem.storeable)
+            {
+                Store(heldItem);
+            }
+            else if (closestItem != null && closestItem.storeable)
+            {
+                Store(closestItem);
             }
         }
 
@@ -229,6 +250,16 @@ public class ItemInteraction : MonoBehaviour
             heldItem.rigidbody.useGravity = true;
             heldItem = null;
             Destroy(holdJoint);
+        }
+    }
+
+    void Store(Item item)
+    {
+        if (inventory != null)
+        {
+            Drop();
+            item.SetActive(false);
+            inventory.AddItem(item);
         }
     }
 }
