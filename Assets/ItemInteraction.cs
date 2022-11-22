@@ -117,18 +117,18 @@ public class ItemInteraction : MonoBehaviour
         }
         
 
-        if (closestItem != null) 
+        // check for pick up button
+        // if there is an item being held, it will drop it
+        // if there is no item being held, and there is an item ready to be picked up, pick itup
+        if (Input.GetButtonDown(pickUpInput))
         {
-            if (Input.GetButtonDown(pickUpInput))
+            if (!heldItem && closestItem != null) 
             {
-                if (!heldItem) 
-                {
-                    PickUp(closestItem);
-                }
-                else
-                {
-                    Drop();
-                }
+                PickUp(closestItem);
+            }
+            else
+            {
+                Drop();
             }
         }
 
