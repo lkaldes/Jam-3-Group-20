@@ -92,12 +92,14 @@ public class Item : MonoBehaviour
         if (stored)
         {
             SetGravity(false);
+            SetCollisions(false);
             gameObject.layer = LayerMask.NameToLayer("Inventory");
             originalParent = gameObject.transform.parent?.gameObject;
         }
         else
         {
             SetGravity(true);
+            SetCollisions(true);
             gameObject.layer = LayerMask.NameToLayer("Default");
             gameObject.transform.SetParent(originalParent?.transform);
         }
@@ -111,11 +113,27 @@ public class Item : MonoBehaviour
         }
     }
 
+    public void SetCollisions(bool b)
+    {
+        if (rigidbody != null)
+        {
+            rigidbody.detectCollisions = b;
+        }
+    }
+
     public void SetVelocity(Vector3 v)
     {
         if (rigidbody != null)
         {
             rigidbody.velocity = v;
+        }
+    }
+
+    public void SetAngularVelocity(Vector3 v)
+    {
+        if (rigidbody != null)
+        {
+            rigidbody.angularVelocity = v;
         }
     }
 }
