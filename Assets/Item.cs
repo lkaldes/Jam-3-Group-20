@@ -8,7 +8,7 @@ public class Item : MonoBehaviour
     public static List<Item> items = new List<Item>();
     public bool pickable = true;
     public bool storeable = false;
-    public bool stored = false;
+    internal bool stored = false;
     private GameObject? originalParent;
 
     public bool Active
