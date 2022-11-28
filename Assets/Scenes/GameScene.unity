@@ -817,7 +817,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickable: 1
   storeable: 0
-  stored: 0
 --- !u!65 &676349508
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1079,7 +1078,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickable: 1
   storeable: 1
-  stored: 0
 --- !u!65 &945177819
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1315,7 +1313,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickable: 1
   storeable: 0
-  stored: 0
 --- !u!65 &1061637707
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1678,7 +1675,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickable: 1
   storeable: 0
-  stored: 0
 --- !u!1 &1246314189
 GameObject:
   m_ObjectHideFlags: 0
@@ -1798,7 +1794,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickable: 1
   storeable: 0
-  stored: 0
 --- !u!65 &1576960272
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2339,7 +2334,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickable: 1
   storeable: 1
-  stored: 0
 --- !u!65 &2119266642
 BoxCollider:
   m_ObjectHideFlags: 0
