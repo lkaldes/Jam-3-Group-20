@@ -128,6 +128,7 @@ public class Inventory : MonoBehaviour
         foreach (Item item in items)
         {
             item.SetVelocity(Vector3.zero);
+            item.SetAngularVelocity(Vector3.zero);
             item.gameObject.transform.rotation = Quaternion.identity;
 
             if (index == 0)
@@ -139,6 +140,7 @@ public class Inventory : MonoBehaviour
 
             item.gameObject.transform.position = fitProgress;
             fitProgress.x += item.gameObject.GetComponent<Renderer>().bounds.size.x + gap;
+            item.SetCollisions(true);
 
             index += 1;
         }
