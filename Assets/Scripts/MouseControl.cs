@@ -97,7 +97,6 @@ public class MouseControl : MonoBehaviour
                 this.lockstate = true;
                 Cursor.lockState = CursorLockMode.Locked;
                 Paused.SetActive(false);
-                Inventory.SetActive(false);
                 Pmain.SetActive(true);
                 Popt.SetActive(false);
                 Pexit.SetActive(false);
