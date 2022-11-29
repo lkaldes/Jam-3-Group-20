@@ -15,7 +15,7 @@ public class MouseControl : MonoBehaviour
     public GameObject Puzzle;
     public GameObject Inventory;
     public Transform player;
-    private bool lockstate;          // Bool state on whether mouse is locked or not
+    public bool lockstate;          // Bool state on whether mouse is locked or not
     float rotationX = 0f;
 
     // Start is called before the first frame update
