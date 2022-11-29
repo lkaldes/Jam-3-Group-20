@@ -228,7 +228,7 @@ public class Inventory : MonoBehaviour
     {
         if (visible)
         {
-            if (!Open)
+            if (!Open && Mouse.lockstate == true)
             {
                 Mouse.Pause();
                 InventoryPanel.SetActive(true);
