@@ -3519,6 +3519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Mouse: {fileID: 367445682}
   InventoryPanel: {fileID: 2121758632}
+  InventoryObject: {fileID: 355246295}
   canvasContainer: {fileID: 355246299}
   inventoryInput: Fire3
 --- !u!114 &957828644

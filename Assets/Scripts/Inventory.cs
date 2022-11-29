@@ -18,6 +18,7 @@ public class Inventory : MonoBehaviour
 
     public MouseControl Mouse;
     public GameObject InventoryPanel;
+    public GameObject InventoryObject;
 
     public Canvas? canvasContainer;
     public string inventoryInput = "Fire3";
@@ -231,6 +232,7 @@ public class Inventory : MonoBehaviour
             {
                 Mouse.Pause();
                 InventoryPanel.SetActive(true);
+                InventoryObject.SetActive(true);
                 RenderItems();
             }
         }
@@ -239,6 +241,7 @@ public class Inventory : MonoBehaviour
             if (Open)
             {
                 InventoryPanel.SetActive(false);
+                InventoryObject.SetActive(false);
                 Mouse.Resume();
             }
         }
