@@ -12,6 +12,7 @@ public class MouseControl : MonoBehaviour
     public GameObject Popt;
     public GameObject Pexit;
     public GameObject Crosshair;     // Crosshair
+    public GameObject Puzzle;
     public Transform player;
     private bool lockstate;          // Bool state on whether mouse is locked or not
     float rotationX = 0f;
@@ -71,6 +72,11 @@ public class MouseControl : MonoBehaviour
         // Pause/Unpause on Esc key
         if (Input.GetKeyUp(KeyCode.Escape))
         {
+            Puzzle.SetActive(false);
+            for (int a = 1; a < Puzzle.transform.childCount; a++)
+            {
+                Puzzle.transform.GetChild(a).gameObject.SetActive(false);
+            }
             if (this.lockstate)
             {
                 this.lockstate = false;
