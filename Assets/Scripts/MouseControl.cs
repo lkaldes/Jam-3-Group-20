@@ -7,8 +7,11 @@ public class MouseControl : MonoBehaviour
 {
 
     public float sensitivity = 100f; // Mouse Sensitivity
-    public Slider SensitivitySlide;  // Mouse Sensitivity Slider
-    public GameObject Crosshair;     //Crosshair
+    public GameObject Paused;  // Pause UI
+    public GameObject Pmain;
+    public GameObject Popt;
+    public GameObject Pexit;
+    public GameObject Crosshair;     // Crosshair
     public Transform player;
     private bool lockstate;          // Bool state on whether mouse is locked or not
     float rotationX = 0f;
@@ -24,6 +27,28 @@ public class MouseControl : MonoBehaviour
     public void Sensitivity(float val)
     {
         sensitivity = val;
+    }
+
+    public void changelock()
+    {
+        if (this.lockstate)
+        {
+            this.lockstate = false;
+        }
+        else
+        {
+            this.lockstate = true;
+        }
+    }
+
+    // Resume Button Function
+    public void Resume()
+    {
+        Debug.Log("Resume Play");
+        this.lockstate = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        Paused.SetActive(false);
+        Crosshair.SetActive(true);
     }
 
     // Update is called once per frame
@@ -50,14 +75,17 @@ public class MouseControl : MonoBehaviour
             {
                 this.lockstate = false;
                 Cursor.lockState = CursorLockMode.None;
-                SensitivitySlide.gameObject.SetActive(true);
+                Paused.SetActive(true);
                 Crosshair.SetActive(false);
             }
             else
             {
                 this.lockstate = true;
                 Cursor.lockState = CursorLockMode.Locked;
-                SensitivitySlide.gameObject.SetActive(false);
+                Paused.SetActive(false);
+                Pmain.SetActive(true);
+                Popt.SetActive(false);
+                Pexit.SetActive(false);
                 Crosshair.SetActive(true);
             }
         }
