@@ -6,7 +6,8 @@ using UnityEngine;
 public class Popup : MonoBehaviour
 {
     public GameObject? target;
-    public string input = "Fire1";
+    public string openInput = "Fire1";
+    public string closeInput = "Fire2";
 
     // Start is called before the first frame update
     void Start()
@@ -17,17 +18,26 @@ public class Popup : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown(input))
+        if (Input.GetButtonDown(closeInput))
         {
-            ToggleTarget();
+            SetTargetActive(false);
         }
     }
 
-    void ToggleTarget()
+    public void SetTargetActive(bool b)
     {
         if (target != null)
         {
-            target.SetActive(!target.activeSelf);
+            target.SetActive(b);
+            if (target.activeSelf)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
         }
     }
 }
