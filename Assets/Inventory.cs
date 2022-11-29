@@ -140,7 +140,7 @@ public class Inventory : MonoBehaviour
 
             item.gameObject.transform.position = fitProgress;
             fitProgress.x += item.gameObject.GetComponent<Renderer>().bounds.size.x + gap;
-            item.SetCollisions(true);
+            // item.SetCollisions(true);
 
             index += 1;
         }

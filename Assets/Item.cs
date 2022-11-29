@@ -92,14 +92,14 @@ public class Item : MonoBehaviour
         if (stored)
         {
             SetGravity(false);
-            SetCollisions(false);
+            // SetCollisions(false);
             gameObject.layer = LayerMask.NameToLayer("Inventory");
             originalParent = gameObject.transform.parent?.gameObject;
         }
         else
         {
             SetGravity(true);
-            SetCollisions(true);
+            // SetCollisions(true);
             gameObject.layer = LayerMask.NameToLayer("Default");
             gameObject.transform.SetParent(originalParent?.transform);
         }
