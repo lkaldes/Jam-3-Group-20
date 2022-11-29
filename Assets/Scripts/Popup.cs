@@ -5,7 +5,7 @@ using UnityEngine;
 #nullable enable
 public class Popup : MonoBehaviour
 {
-    public GameObject? target;
+    public List<GameObject> targets = new();
     public string openInput = "Fire1";
     public string closeInput = "Fire2";
 
@@ -26,18 +26,19 @@ public class Popup : MonoBehaviour
 
     public void SetTargetActive(bool b)
     {
-        if (target != null)
+        foreach (GameObject target in targets)
         {
             target.SetActive(b);
-            if (target.activeSelf)
-            {
-                Cursor.lockState = CursorLockMode.None;
-                
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-            }
+        }
+        
+        if (b)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 }

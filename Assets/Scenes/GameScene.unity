@@ -5944,7 +5944,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f242a36f45ec04fa916e8a515ed49a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1944547712}
+  targets:
+  - {fileID: 2066825204}
+  - {fileID: 1944547712}
   openInput: Fire1
   closeInput: Fire2
 --- !u!1 &1624237852
@@ -6468,7 +6470,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1880675470
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6894,7 +6896,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2066825205
 RectTransform:
   m_ObjectHideFlags: 0
