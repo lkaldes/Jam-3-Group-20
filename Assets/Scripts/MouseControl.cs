@@ -13,6 +13,7 @@ public class MouseControl : MonoBehaviour
     public GameObject Pexit;
     public GameObject Crosshair;     // Crosshair
     public GameObject Puzzle;
+    public GameObject Inventory;
     public Transform player;
     private bool lockstate;          // Bool state on whether mouse is locked or not
     float rotationX = 0f;
@@ -45,11 +46,18 @@ public class MouseControl : MonoBehaviour
     // Resume Button Function
     public void Resume()
     {
-        Debug.Log("Resume Play");
         this.lockstate = true;
         Cursor.lockState = CursorLockMode.Locked;
         Paused.SetActive(false);
         Crosshair.SetActive(true);
+    }
+
+    // Pause Function Mimic
+    public void Pause()
+    {
+        this.lockstate = false;
+        Cursor.lockState = CursorLockMode.None;
+        Crosshair.SetActive(false);
     }
 
     // Update is called once per frame
@@ -89,6 +97,7 @@ public class MouseControl : MonoBehaviour
                 this.lockstate = true;
                 Cursor.lockState = CursorLockMode.Locked;
                 Paused.SetActive(false);
+                Inventory.SetActive(false);
                 Pmain.SetActive(true);
                 Popt.SetActive(false);
                 Pexit.SetActive(false);

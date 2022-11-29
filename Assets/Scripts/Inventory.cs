@@ -16,6 +16,9 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public MouseControl Mouse;
+    public GameObject InventoryPanel;
+
     public Canvas? canvasContainer;
     public string inventoryInput = "Fire3";
     private Canvas? canvas;
@@ -226,7 +229,8 @@ public class Inventory : MonoBehaviour
         {
             if (!Open)
             {
-                Cursor.lockState = CursorLockMode.None;
+                Mouse.Pause();
+                InventoryPanel.SetActive(true);
                 RenderItems();
             }
         }
@@ -234,7 +238,8 @@ public class Inventory : MonoBehaviour
         {
             if (Open)
             {
-                Cursor.lockState = CursorLockMode.Locked;
+                InventoryPanel.SetActive(false);
+                Mouse.Resume();
             }
         }
         SetActive(visible);

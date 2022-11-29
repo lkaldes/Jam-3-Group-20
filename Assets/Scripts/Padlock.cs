@@ -20,6 +20,8 @@ public class Padlock : MonoBehaviour
     public Button BMB;
     public Button BRB;
 
+    public GameObject Lock;
+
     bool TL = false;
     bool TM = false;
     bool TR = false;
@@ -219,6 +221,7 @@ public class Padlock : MonoBehaviour
     {
         if (TL && !TM && !TR && ML && !MM && !MR && BL && BM && BR)
         {
+            Lock.SetActive(false);
             Padlocks.SetActive(false);
             Puzzle.SetActive(false);
             MouseCntrl.Resume();
