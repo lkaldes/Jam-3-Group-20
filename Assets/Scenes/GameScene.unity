@@ -1078,8 +1078,9 @@ MonoBehaviour:
   Pexit: {fileID: 1279821688}
   Crosshair: {fileID: 1130351459}
   Puzzle: {fileID: 2066825204}
-  Inventory: {fileID: 355246295}
+  Inventory: {fileID: 957828643}
   player: {fileID: 957828640}
+  lockstate: 0
 --- !u!114 &367445683
 MonoBehaviour:
   m_ObjectHideFlags: 0
