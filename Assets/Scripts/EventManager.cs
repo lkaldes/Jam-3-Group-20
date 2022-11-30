@@ -6,7 +6,6 @@ using UnityEngine;
 public class EventManager
 {
 
-    public System.Delegate? testDelegate;
     private static EventManager? events;
     public static EventManager Events 
     {
@@ -28,9 +27,9 @@ public class EventManager
     {
         private class EventCallback
         {
-            public System.Delegate callback;
+            public System.Action callback;
             public bool once;
-            public EventCallback(System.Delegate callback, bool once = false)
+            public EventCallback(System.Action callback, bool once = false)
             {
                 this.callback = callback;
                 this.once = once;
@@ -49,7 +48,7 @@ public class EventManager
             this.name = name;
         }
 
-        public void Add(System.Delegate callback, bool once = false)
+        public void Add(System.Action callback, bool once = false)
         {
             callbacks.Add(new EventCallback(callback, once));
         }
@@ -68,7 +67,7 @@ public class EventManager
             }
         }
 
-        public void Remove(System.Delegate callback)
+        public void Remove(System.Action callback)
         {
             if (callbacks.Count > 0)
             {
@@ -91,7 +90,7 @@ public class EventManager
 
     private readonly Dictionary<string, Event> eventMap = new();
 
-    public EventManager On(string eventName, System.Delegate callback, bool once = false)
+    public EventManager On(string eventName, System.Action callback, bool once = false)
     {
         if (!eventMap.ContainsKey(eventName))
         {
@@ -101,7 +100,7 @@ public class EventManager
         return this;
     }
 
-    public EventManager Once(string eventName, System.Delegate callback)
+    public EventManager Once(string eventName, System.Action callback)
     {
         if (!eventMap.ContainsKey(eventName))
         {
@@ -111,7 +110,7 @@ public class EventManager
         return this;
     }
 
-    public EventManager Off(string eventName, System.Delegate callback)
+    public EventManager Off(string eventName, System.Action callback)
     {
         if (eventMap.ContainsKey(eventName))
         {
