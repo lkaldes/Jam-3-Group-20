@@ -34,7 +34,7 @@ public class PopupInteraction : MonoBehaviour
                 {
                     if (Input.GetButtonDown(popup.openInput))
                     {
-                        popup.SetTargetActive(true);
+                        popup.Open();
                     }
                 }
             }
