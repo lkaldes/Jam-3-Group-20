@@ -553,8 +553,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1944547714}
         m_TargetAssemblyTypeName: Padlock, Assembly-CSharp
-        m_MethodName: TTL
-        m_Mode: 1
+        m_MethodName: ClickButton
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -855,12 +855,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1944547714}
         m_TargetAssemblyTypeName: Padlock, Assembly-CSharp
-        m_MethodName: TBM
-        m_Mode: 1
+        m_MethodName: ClickButton
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 7
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2755,12 +2755,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1944547714}
         m_TargetAssemblyTypeName: Padlock, Assembly-CSharp
-        m_MethodName: TMM
-        m_Mode: 1
+        m_MethodName: ClickButton
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3054,12 +3054,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1944547714}
         m_TargetAssemblyTypeName: Padlock, Assembly-CSharp
-        m_MethodName: TBL
-        m_Mode: 1
+        m_MethodName: ClickButton
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 6
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -4147,12 +4147,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1944547714}
         m_TargetAssemblyTypeName: Padlock, Assembly-CSharp
-        m_MethodName: TTM
-        m_Mode: 1
+        m_MethodName: ClickButton
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -4280,12 +4280,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1944547714}
         m_TargetAssemblyTypeName: Padlock, Assembly-CSharp
-        m_MethodName: TML
-        m_Mode: 1
+        m_MethodName: ClickButton
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -4805,12 +4805,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1944547714}
         m_TargetAssemblyTypeName: Padlock, Assembly-CSharp
-        m_MethodName: TTR
-        m_Mode: 1
+        m_MethodName: ClickButton
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -5073,12 +5073,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1944547714}
         m_TargetAssemblyTypeName: Padlock, Assembly-CSharp
-        m_MethodName: TMR
-        m_Mode: 1
+        m_MethodName: ClickButton
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -6371,18 +6371,42 @@ MonoBehaviour:
   Puzzle: {fileID: 2066825204}
   Padlocks: {fileID: 1944547712}
   MouseCntrl: {fileID: 367445682}
-  TLB: {fileID: 150420063}
-  TMB: {fileID: 1088464449}
-  TRB: {fileID: 1280009010}
-  MLB: {fileID: 1095794132}
-  MMB: {fileID: 681912037}
-  MRB: {fileID: 1396437908}
-  BLB: {fileID: 789860441}
-  BMB: {fileID: 323963490}
-  BRB: {fileID: 2024831676}
   Lock: {fileID: 1603444900}
-  color0: {r: 1, g: 1, b: 1, a: 1}
-  color1: {r: 1, g: 0.3254717, b: 0.3254717, a: 1}
+  onUnlock:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1603444900}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  questions:
+  - button: {fileID: 150420063}
+    answer: 1
+  - button: {fileID: 1088464449}
+    answer: 0
+  - button: {fileID: 1280009010}
+    answer: 0
+  - button: {fileID: 1095794132}
+    answer: 1
+  - button: {fileID: 681912037}
+    answer: 0
+  - button: {fileID: 1396437908}
+    answer: 0
+  - button: {fileID: 789860441}
+    answer: 1
+  - button: {fileID: 323963490}
+    answer: 1
+  - button: {fileID: 2024831676}
+    answer: 1
+  questions2: []
 --- !u!1 &1977170497
 GameObject:
   m_ObjectHideFlags: 0
@@ -6615,12 +6639,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1944547714}
         m_TargetAssemblyTypeName: Padlock, Assembly-CSharp
-        m_MethodName: TBR
-        m_Mode: 1
+        m_MethodName: ClickButton
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 8
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
