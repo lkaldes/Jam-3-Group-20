@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class Padlock : MonoBehaviour
 {
-    public MouseControl MouseCntrl;
+    // public MouseControl MouseCntrl;
 
     [System.Serializable]
     public class Question<T>
@@ -22,7 +22,7 @@ public class Padlock : MonoBehaviour
             }
             set
             {
-                current = value;
+                SetCurrent(value);
             }
         }
 
@@ -40,7 +40,6 @@ public class Padlock : MonoBehaviour
     public UnityEvent onUnlock;
 
     public List<Question<bool>> questions;
-    public List<Question<dynamic>> questions2;
 
     private bool unlocked = false;
     public bool Unlocked
@@ -48,6 +47,15 @@ public class Padlock : MonoBehaviour
         get
         {
             return unlocked;
+        }
+    }
+
+    public void SetCurrent(int index, bool value)
+    {
+        if (index >= 0 && index < questions.Count)
+        {
+            Question<bool> question = questions[index];
+            question.SetCurrent(value);
         }
     }
 
@@ -113,6 +121,5 @@ public class Padlock : MonoBehaviour
     {
         EventManager.Events.Trigger("kitchenPadlockUnlocked");
         onUnlock.Invoke();
-        MouseCntrl.Resume();
     }
 }
