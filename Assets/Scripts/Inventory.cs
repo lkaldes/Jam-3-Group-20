@@ -16,10 +16,8 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public MouseControl Mouse;
-    public GameObject InventoryPanel;
-    public GameObject InventoryObject;
-
+    public MouseControl? Mouse;
+    public GameObject? InventoryPanel;
     public Canvas? canvasContainer;
     public string inventoryInput = "Fire3";
     private Canvas? canvas;
@@ -228,11 +226,16 @@ public class Inventory : MonoBehaviour
     {
         if (visible)
         {
-            if (!Open && Mouse.lockstate == true)
+            if (!Open)
             {
-                Mouse.Pause();
-                InventoryPanel.SetActive(true);
-                InventoryObject.SetActive(true);
+                if (Mouse != null && Mouse.lockstate == true)
+                {
+                    Mouse.Pause();
+                }
+                
+                canvasContainer?.gameObject.SetActive(true);
+                InventoryPanel?.SetActive(true);
+                
                 RenderItems();
             }
         }
@@ -240,9 +243,12 @@ public class Inventory : MonoBehaviour
         {
             if (Open)
             {
-                InventoryPanel.SetActive(false);
-                InventoryObject.SetActive(false);
-                Mouse.Resume();
+                InventoryPanel?.SetActive(false);
+                canvasContainer?.gameObject.SetActive(false);
+                if (Mouse != null)
+                {
+                    Mouse.Resume();
+                }
             }
         }
         SetActive(visible);
