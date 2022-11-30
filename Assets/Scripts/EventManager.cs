@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 #nullable enable
-public class EventManager : MonoBehaviour
+public class EventManager
 {
 
     public System.Delegate? testDelegate;
