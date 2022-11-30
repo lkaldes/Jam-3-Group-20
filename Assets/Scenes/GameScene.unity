@@ -397,10 +397,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 367445682}
-        m_TargetAssemblyTypeName: MouseControl, Assembly-CSharp
-        m_MethodName: Resume
-        m_Mode: 1
+      - m_Target: {fileID: 546889290}
+        m_TargetAssemblyTypeName: Popup, Assembly-CSharp
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -553,8 +553,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1944547714}
         m_TargetAssemblyTypeName: Padlock, Assembly-CSharp
-        m_MethodName: TTL
-        m_Mode: 1
+        m_MethodName: ClickButton
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -855,12 +855,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1944547714}
         m_TargetAssemblyTypeName: Padlock, Assembly-CSharp
-        m_MethodName: TBM
-        m_Mode: 1
+        m_MethodName: ClickButton
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 7
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -935,13 +935,14 @@ GameObject:
   - component: {fileID: 355246299}
   - component: {fileID: 355246298}
   - component: {fileID: 355246297}
+  - component: {fileID: 355246300}
   m_Layer: 5
   m_Name: InventoryContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &355246296
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1024,6 +1025,25 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &355246300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355246295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3f242a36f45ec04fa916e8a515ed49a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 0
+  targets:
+  - {fileID: 355246295}
+  openInput: Fire1
+  openInputEnabled: 0
+  closeInput: Fire2
+  closeInputEnabled: 0
 --- !u!1 &367445680
 GameObject:
   m_ObjectHideFlags: 0
@@ -1072,7 +1092,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensitivity: 500
-  Paused: {fileID: 546889288}
+  pausePopup: {fileID: 546889290}
   Pmain: {fileID: 183828210}
   Popt: {fileID: 1584404823}
   Pexit: {fileID: 1279821688}
@@ -1770,6 +1790,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 546889289}
+  - component: {fileID: 546889290}
   m_Layer: 5
   m_Name: Pause
   m_TagString: Untagged
@@ -1794,13 +1815,32 @@ RectTransform:
   - {fileID: 1584404824}
   - {fileID: 1279821689}
   m_Father: {fileID: 1810129778}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &546889290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546889288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3f242a36f45ec04fa916e8a515ed49a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 1
+  targets:
+  - {fileID: 546889288}
+  openInput: Fire1
+  openInputEnabled: 0
+  closeInput: Fire2
+  closeInputEnabled: 0
 --- !u!1 &592124777
 GameObject:
   m_ObjectHideFlags: 0
@@ -2755,12 +2795,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1944547714}
         m_TargetAssemblyTypeName: Padlock, Assembly-CSharp
-        m_MethodName: TMM
-        m_Mode: 1
+        m_MethodName: ClickButton
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3054,12 +3094,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1944547714}
         m_TargetAssemblyTypeName: Padlock, Assembly-CSharp
-        m_MethodName: TBL
-        m_Mode: 1
+        m_MethodName: ClickButton
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 6
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3520,9 +3560,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Mouse: {fileID: 367445682}
   InventoryPanel: {fileID: 2121758632}
-  InventoryObject: {fileID: 355246295}
   canvasContainer: {fileID: 355246299}
   inventoryInput: Fire3
+  popup: {fileID: 355246300}
 --- !u!114 &957828644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4147,12 +4187,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1944547714}
         m_TargetAssemblyTypeName: Padlock, Assembly-CSharp
-        m_MethodName: TTM
-        m_Mode: 1
+        m_MethodName: ClickButton
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -4280,12 +4320,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1944547714}
         m_TargetAssemblyTypeName: Padlock, Assembly-CSharp
-        m_MethodName: TML
-        m_Mode: 1
+        m_MethodName: ClickButton
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -4416,7 +4456,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1810129778}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4805,12 +4845,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1944547714}
         m_TargetAssemblyTypeName: Padlock, Assembly-CSharp
-        m_MethodName: TTR
-        m_Mode: 1
+        m_MethodName: ClickButton
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -5073,12 +5113,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1944547714}
         m_TargetAssemblyTypeName: Padlock, Assembly-CSharp
-        m_MethodName: TMR
-        m_Mode: 1
+        m_MethodName: ClickButton
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -5656,11 +5696,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f242a36f45ec04fa916e8a515ed49a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  priority: 0
   targets:
   - {fileID: 2066825204}
   - {fileID: 1944547712}
   openInput: Fire1
+  openInputEnabled: 0
   closeInput: Fire2
+  closeInputEnabled: 1
 --- !u!1 &1624237852
 GameObject:
   m_ObjectHideFlags: 0
@@ -6222,10 +6265,10 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2066825205}
-  - {fileID: 546889289}
-  - {fileID: 355246296}
   - {fileID: 1130351460}
+  - {fileID: 2066825205}
+  - {fileID: 355246296}
+  - {fileID: 546889289}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6368,21 +6411,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 087b224b537e9fb4aba1588c93c7172a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Puzzle: {fileID: 2066825204}
-  Padlocks: {fileID: 1944547712}
-  MouseCntrl: {fileID: 367445682}
-  TLB: {fileID: 150420063}
-  TMB: {fileID: 1088464449}
-  TRB: {fileID: 1280009010}
-  MLB: {fileID: 1095794132}
-  MMB: {fileID: 681912037}
-  MRB: {fileID: 1396437908}
-  BLB: {fileID: 789860441}
-  BMB: {fileID: 323963490}
-  BRB: {fileID: 2024831676}
-  Lock: {fileID: 1603444900}
-  color0: {r: 1, g: 1, b: 1, a: 1}
-  color1: {r: 1, g: 0.3254717, b: 0.3254717, a: 1}
+  onUnlock:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1603444900}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2066825204}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1603444903}
+        m_TargetAssemblyTypeName: Popup, Assembly-CSharp
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  questions:
+  - button: {fileID: 150420063}
+    answer: 1
+  - button: {fileID: 1088464449}
+    answer: 0
+  - button: {fileID: 1280009010}
+    answer: 0
+  - button: {fileID: 1095794132}
+    answer: 1
+  - button: {fileID: 681912037}
+    answer: 0
+  - button: {fileID: 1396437908}
+    answer: 0
+  - button: {fileID: 789860441}
+    answer: 1
+  - button: {fileID: 323963490}
+    answer: 1
+  - button: {fileID: 2024831676}
+    answer: 1
 --- !u!1 &1977170497
 GameObject:
   m_ObjectHideFlags: 0
@@ -6615,12 +6701,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1944547714}
         m_TargetAssemblyTypeName: Padlock, Assembly-CSharp
-        m_MethodName: TBR
-        m_Mode: 1
+        m_MethodName: ClickButton
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 8
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -6694,13 +6780,70 @@ RectTransform:
   - {fileID: 1880675470}
   - {fileID: 1944547713}
   m_Father: {fileID: 1810129778}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &2103516876
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2103516878}
+  - component: {fileID: 2103516877}
+  - component: {fileID: 2103516879}
+  m_Layer: 0
+  m_Name: Singleton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2103516877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103516876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ae08de911dbcca4cb0617bac6be5984, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &2103516878
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103516876}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.2606068, y: -0.38030744, z: 6.0571513}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2103516879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103516876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9854e64c2646ae14a88a52805398302d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2119266639
 GameObject:
   m_ObjectHideFlags: 0
@@ -6847,7 +6990,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2121758633
 RectTransform:
   m_ObjectHideFlags: 0

@@ -98,7 +98,7 @@ public class ItemInteraction : MonoBehaviour
             return;
         }
 
-        if (inventory != null && inventory.Open)
+        if (inventory != null && inventory.Opened)
         {
             return;
         }

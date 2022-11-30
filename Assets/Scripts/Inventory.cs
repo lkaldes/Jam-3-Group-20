@@ -16,10 +16,8 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public MouseControl Mouse;
-    public GameObject InventoryPanel;
-    public GameObject InventoryObject;
-
+    public MouseControl? Mouse;
+    public GameObject? InventoryPanel;
     public Canvas? canvasContainer;
     public string inventoryInput = "Fire3";
     private Canvas? canvas;
@@ -27,16 +25,21 @@ public class Inventory : MonoBehaviour
     private RawImage? rawImage;
     private Camera? canvasCamera;
     private LayerMask inventoryLayerMask;
+    public Popup? popup;
     private int inventoryLayer;
 
     private ItemInteraction? itemInteraction;
-    public bool Open
+    public bool Opened
     {
         get
         {
-            if (canvas != null)
+            // if (canvas != null)
+            // {
+            //     return canvas.gameObject.activeSelf;
+            // }
+            if (popup != null)
             {
-                return canvas.gameObject.activeSelf;
+                return popup.Focused;
             }
             return false;
         }
@@ -75,7 +78,12 @@ public class Inventory : MonoBehaviour
 
         itemInteraction = gameObject.GetComponent<ItemInteraction>();
 
-        SetActive(false);
+        if (popup != null)
+        {
+            popup.Events.On("opened", RenderItems);
+        }
+
+        // SetActive(false);
     }
 
     // Update is called once per frame
@@ -83,10 +91,21 @@ public class Inventory : MonoBehaviour
     {
         if (Input.GetButtonDown(inventoryInput))
         {
-            SetVisible(!Open);
+            if (popup != null)
+            {
+                if (popup.Focused)
+                {
+                    popup.Close();
+                }
+                else
+                {
+                    popup.Open();
+                }
+            }
+
         }
 
-        if (Open)
+        if (Opened)
         {
             Ray? ray = canvasCamera?.ScreenPointToRay(Input.mousePosition);
             if (ray != null && Physics.Raycast((Ray)ray, out RaycastHit hit, 100f, inventoryLayerMask))
@@ -111,7 +130,7 @@ public class Inventory : MonoBehaviour
                             item.Position = gameObject.transform.position;
                         }
 
-                        SetVisible(false);
+                        popup?.Close();
                     }
                 }
             }
@@ -214,37 +233,5 @@ public class Inventory : MonoBehaviour
     public void Clear()
     {
         items.Clear();
-    }
-
-    public void SetActive(bool active = true)
-    {
-        if (canvas != null && canvas.gameObject.activeSelf != active)
-        {
-            canvas.gameObject.SetActive(active);
-        }
-    }
-
-    public void SetVisible(bool visible)
-    {
-        if (visible)
-        {
-            if (!Open && Mouse.lockstate == true)
-            {
-                Mouse.Pause();
-                InventoryPanel.SetActive(true);
-                InventoryObject.SetActive(true);
-                RenderItems();
-            }
-        }
-        else
-        {
-            if (Open)
-            {
-                InventoryPanel.SetActive(false);
-                InventoryObject.SetActive(false);
-                Mouse.Resume();
-            }
-        }
-        SetActive(visible);
     }
 }

@@ -7,7 +7,8 @@ public class MouseControl : MonoBehaviour
 {
 
     public float sensitivity = 100f; // Mouse Sensitivity
-    public GameObject Paused;  // Pause UI
+    // public GameObject Paused;  // Pause UI
+    public Popup pausePopup;
     public GameObject Pmain;
     public GameObject Popt;
     public GameObject Pexit;
@@ -31,78 +32,29 @@ public class MouseControl : MonoBehaviour
         sensitivity = val;
     }
 
-    public void changelock()
-    {
-        if (this.lockstate)
-        {
-            this.lockstate = false;
-        }
-        else
-        {
-            this.lockstate = true;
-        }
-    }
-
-    // Resume Button Function
-    public void Resume()
-    {
-        this.lockstate = true;
-        Cursor.lockState = CursorLockMode.Locked;
-        Paused.SetActive(false);
-        Crosshair.SetActive(true);
-    }
-
-    // Pause Function Mimic
-    public void Pause()
-    {
-        this.lockstate = false;
-        Cursor.lockState = CursorLockMode.None;
-        Crosshair.SetActive(false);
-    }
-
     // Update is called once per frame
     void Update()
     {
-        // Get current mouse coordinates
-        float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
-
-        rotationX -= mouseY;
-        rotationX = Mathf.Clamp(rotationX, -90f, 90f);
-
-        // Move Camera on Y axis or player model on X axis
-        if (this.lockstate)
+        
+        // Move Camera on Y axis or player model on X axis if cursor is locked
+        if (Cursor.lockState == CursorLockMode.Locked)
         {
+            // Get current mouse coordinates
+            float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
+            float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
+
+            rotationX -= mouseY;
+            rotationX = Mathf.Clamp(rotationX, -90f, 90f);
+
             transform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
             player.Rotate(Vector3.up * mouseX);
         }
 
         // Pause/Unpause on Esc key
-        if (Input.GetKeyUp(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Puzzle.SetActive(false);
-            for (int a = 1; a < Puzzle.transform.childCount; a++)
-            {
-                Puzzle.transform.GetChild(a).gameObject.SetActive(false);
-            }
-            if (this.lockstate)
-            {
-                this.lockstate = false;
-                Cursor.lockState = CursorLockMode.None;
-                Paused.SetActive(true);
-                Crosshair.SetActive(false);
-            }
-            else
-            {
-                this.lockstate = true;
-                Cursor.lockState = CursorLockMode.Locked;
-                Paused.SetActive(false);
-                Inventory.SetVisible(false);
-                Pmain.SetActive(true);
-                Popt.SetActive(false);
-                Pexit.SetActive(false);
-                Crosshair.SetActive(true);
-            }
+            pausePopup?.SetActive(!pausePopup.Opened);
+
         }
     }
 }
