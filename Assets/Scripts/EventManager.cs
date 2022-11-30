@@ -24,9 +24,9 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    private struct Event
+    private class Event
     {
-        private struct EventCallback
+        private class EventCallback
         {
             public System.Delegate callback;
             public bool once;
