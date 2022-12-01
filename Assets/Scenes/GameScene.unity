@@ -2066,6 +2066,7 @@ MonoBehaviour:
   Puzzle: {fileID: 2066825204}
   Inventory: {fileID: 957828643}
   player: {fileID: 957828640}
+  playerBody: {fileID: 957828646}
   lockstate: 0
 --- !u!114 &367445683
 MonoBehaviour:

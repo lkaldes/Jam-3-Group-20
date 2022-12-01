@@ -15,7 +15,7 @@ public class MouseControl : MonoBehaviour
     public GameObject Crosshair;     // Crosshair
     public GameObject Puzzle;
     public Inventory Inventory;
-    public Transform player;
+    public Rigidbody playerBody;
     public bool lockstate;          // Bool state on whether mouse is locked or not
     float rotationX = 0f;
 
@@ -47,7 +47,7 @@ public class MouseControl : MonoBehaviour
             rotationX = Mathf.Clamp(rotationX, -90f, 90f);
 
             transform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
-            player.Rotate(Vector3.up * mouseX);
+            playerBody.rotation = Quaternion.Euler(playerBody.rotation.eulerAngles + Vector3.up * mouseX);
         }
 
         // Pause/Unpause on Esc key
