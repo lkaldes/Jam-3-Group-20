@@ -5,12 +5,11 @@ using UnityEngine;
 public class BreakTvAudio : MonoBehaviour
 {
     
-    public AudioClip tvBreaking;
+    public AudioSource tvBreaking;
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<AudioSource>().playOnAwake = false;
-        GetComponent<AudioSource>().clip = tvBreaking;
+        tvBreaking = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -23,21 +22,12 @@ public class BreakTvAudio : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         //Check for a match with the specified name on any GameObject that collides with your GameObject
-        if (collision.gameObject.name == "FirstPersonPlayer")
-        {
-            //If the GameObject's name matches the one you suggest, output this message in the console
-            Debug.Log("Do something here");
-
+        if (collision.gameObject.tag == "Target")
+        {   
+            Debug.Log("collision");
             //If the GameObject's name matches the one you suggest, play TV breaking audio
-            GetComponent<AudioSource>().Play();
+            tvBreaking.Play();
 
         }
-
-        //Check for a match with the specific tag on any GameObject that collides with your GameObject
-        // if (collision.gameObject.tag == "MyGameObjectTag")
-        // {
-        //     //If the GameObject has the same tag as specified, output this message in the console
-        //     Debug.Log("Do something else here");
-        // }
     }
 }
