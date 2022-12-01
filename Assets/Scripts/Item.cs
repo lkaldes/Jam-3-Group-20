@@ -65,6 +65,8 @@ public class Item : MonoBehaviour
         rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
         
         originalParent = gameObject.transform.parent?.gameObject;
+
+        gameObject.layer = LayerMask.NameToLayer("Item");
     }
 
     // Update is called once per frame
@@ -100,7 +102,7 @@ public class Item : MonoBehaviour
         {
             SetGravity(true);
             // SetCollisions(true);
-            gameObject.layer = LayerMask.NameToLayer("Default");
+            gameObject.layer = LayerMask.NameToLayer("Item");
             gameObject.transform.SetParent(originalParent?.transform);
         }
     }
