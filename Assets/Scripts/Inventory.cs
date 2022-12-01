@@ -122,6 +122,7 @@ public class Inventory : MonoBehaviour
                         {
                             item.Position = itemInteraction.HoldPosition;
                             item.transform.position = item.Position;
+                            itemInteraction.holdDistance = 5f;
                             itemInteraction.PickUp(item);
                             item.SetVelocity(Vector3.zero);
                         } 

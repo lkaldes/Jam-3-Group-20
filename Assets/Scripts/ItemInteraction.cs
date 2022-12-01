@@ -34,6 +34,9 @@ public class ItemInteraction : MonoBehaviour
     private Rigidbody? holdBody;
     private Vector3 screenCenter = new Vector3((float)Screen.width / 2f, (float)Screen.height / 2f, 0);
     public Mesh? debugHoldMesh;
+    private Quaternion originalRotation = new();
+    private Vector3 eulerRotationDifference = new();
+    private Vector3 originalPosition = new();
 
     public Vector3 HoldPosition
     {
@@ -41,7 +44,7 @@ public class ItemInteraction : MonoBehaviour
         {
             if (camera != null)
             {
-                return camera.ScreenToWorldPoint(screenCenter + Vector3.forward * holdDistance);
+                return camera.ViewportToWorldPoint(new Vector3(.5f, .5f, holdDistance));
             }
             return Vector3.zero;
         }
@@ -103,6 +106,11 @@ public class ItemInteraction : MonoBehaviour
             return;
         }
 
+        if (heldItem != null)
+        {
+            holdDistance = Mathf.Clamp(holdDistance + Input.mouseScrollDelta.y * Time.deltaTime * 50f, .1f, maxPickDistance);
+        }
+
         // get the closest pickable item
         Item? closestItem = GetClosestItem();
         
@@ -136,8 +144,7 @@ public class ItemInteraction : MonoBehaviour
 
         // set the hold body position to the position holdDistance away in front of the camera
         // this is where held items will move to when picked up
-        Vector3 holdPosition = camera.ScreenToWorldPoint(screenCenter + Vector3.forward * holdDistance);
-        holdBody.position = holdPosition;
+        holdBody.position = HoldPosition;
 
         // set the hold body's rotation the same as the player's rotation
         // this will make the item rotate with the player
@@ -198,7 +205,10 @@ public class ItemInteraction : MonoBehaviour
             if (heldItem.rigidbody != null)
             {
                 Vector3 difference = holdObject.transform.position - heldItem.rigidbody.position;
-                heldItem.rigidbody.velocity = difference * 10f;
+                heldItem.rigidbody.velocity = difference * 15f;
+
+                heldItem.rigidbody.rotation = Quaternion.Euler(holdObject.transform.rotation.eulerAngles + eulerRotationDifference);
+                heldItem.rigidbody.angularVelocity = Vector3.zero;
             }
         }
     }
@@ -211,6 +221,16 @@ public class ItemInteraction : MonoBehaviour
         }
         heldItem = item;
         heldItem.SetGravity(false);
+        if (heldItem.rigidbody != null && holdObject != null)
+        {
+            originalRotation = heldItem.rigidbody.rotation;
+            originalPosition = heldItem.rigidbody.position;
+
+            holdDistance = (transform.position - originalPosition).magnitude;
+
+            eulerRotationDifference = originalRotation.eulerAngles - holdObject.transform.rotation.eulerAngles;
+        }
+        
     }
 
     public void Drop()
@@ -272,7 +292,7 @@ public class ItemInteraction : MonoBehaviour
         }
         else if(pickMode == PickModes.Raycast)
         {
-            Ray ray = camera.ScreenPointToRay(screenCenter);
+            Ray ray = camera.ViewportPointToRay(new Vector3(.5f, .5f, 0));
             if (Physics.Raycast(ray, out RaycastHit raycastHit, maxPickDistance))
             {
                 Item itemComponent = raycastHit.collider.gameObject.GetComponent<Item>();
