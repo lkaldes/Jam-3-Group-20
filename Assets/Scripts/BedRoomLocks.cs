@@ -7,12 +7,13 @@ public class BedRoomLocks : MonoBehaviour
 { 
     public string EventID;
     // Start is called before the first frame update
-    public EventManager Events {get;}
+   // public EventManager Events {get;}
 
 
     void Start()
     {
-        Events.On(EventID,PuzzleSolved,false);
+        Debug.Log("huh");
+        EventManager.Events.On(EventID,PuzzleSolved,false);
 
         
     }
@@ -25,8 +26,8 @@ public class BedRoomLocks : MonoBehaviour
     //Cleans up after itself once solved.
     void PuzzleSolved(){
         Debug.Log("mario?");
-        Events.Off(EventID,PuzzleSolved,false);
+        EventManager.Events.Off(EventID,PuzzleSolved);
 
-         GameObject.SetActive(false);
+         gameObject.SetActive(false);
     }
 }

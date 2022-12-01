@@ -13,8 +13,10 @@ public class EventManager
         {
         if (EventManager.events == null)
         {
+            Debug.Log("get was null");
             EventManager.events = new EventManager();
         }
+        //Debug.Log("get was not null");
         return EventManager.events;
         } 
         private set
