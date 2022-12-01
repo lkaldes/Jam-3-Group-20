@@ -4,6 +4,7 @@ using UnityEngine;
 //Use this to test stuff
 public class AreaTrigger : MonoBehaviour
 {
+    public string EventTrigger;
    // public static EventManager Events {get;}
     // Start is called before the first frame update
     void Start()
@@ -18,8 +19,8 @@ public class AreaTrigger : MonoBehaviour
     }
 
      private void OnTriggerEnter(Collider other){
-        
-        EventManager.Events.Trigger("duddy");
+
+        EventManager.Events.Trigger(EventTrigger);
        
     }
 }
