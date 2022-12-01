@@ -32,8 +32,6 @@ public class ItemInteraction : MonoBehaviour
     private GameObject? holdObject;
     private Renderer? holdObjectRenderer;
     private Rigidbody? holdBody;
-    private FixedJoint? holdJoint;
-    private Vector3 previousHoldPosition = Vector3.zero;
     private Vector3 screenCenter = new Vector3((float)Screen.width / 2f, (float)Screen.height / 2f, 0);
     public Mesh? debugHoldMesh;
 
@@ -58,6 +56,7 @@ public class ItemInteraction : MonoBehaviour
         }
 
         holdObject = new GameObject();
+        holdObject.name ??= "ItemInteractionHoldTarget";
         holdBody = holdObject.AddComponent<Rigidbody>();
         holdBody.useGravity = false;
         holdBody.detectCollisions = false;
@@ -78,6 +77,7 @@ public class ItemInteraction : MonoBehaviour
         // debug indicator that shows which item is being picked
         // holy. this is so nasty. i have never had so much trouble just drawing a rectangle to the screen GUH!!
         debugObject = new GameObject();
+        debugObject.name ??= "ItemInteractionItemIndicator";
         debugImage = debugObject.AddComponent<Image>();
         debugImage.transform.SetParent(GameObject.Find("Canvas").transform);
         if (debugSprite) 
@@ -132,19 +132,7 @@ public class ItemInteraction : MonoBehaviour
             {
                 Store(closestItem);
             }
-        }
-
-        // check if hold joint is broken
-        if (!holdJoint)
-        {
-            // drop the item if so
-            Drop();
-        }
-
-        // calculate the velocity of the hold body based on the previous position
-        holdBody.velocity = holdBody.position - previousHoldPosition;
-        previousHoldPosition = holdBody.position;
-        
+        }       
 
         // set the hold body position to the position holdDistance away in front of the camera
         // this is where held items will move to when picked up
@@ -202,33 +190,45 @@ public class ItemInteraction : MonoBehaviour
         }
     }
 
+    void FixedUpdate()
+    {
+        
+        if (heldItem != null && holdObject != null)
+        {
+            if (heldItem.rigidbody != null)
+            {
+                Vector3 difference = holdObject.transform.position - heldItem.rigidbody.position;
+                heldItem.rigidbody.velocity = difference * 10f;
+            }
+        }
+    }
+
     public void PickUp(Item item) 
     {       
         if (heldItem != null)
         {
             Drop();
         }
-
         heldItem = item;
         heldItem.SetGravity(false);
-        if (holdObject != null) 
-        {
-            holdObject.transform.position = heldItem.Position;
-            holdJoint = holdObject.AddComponent<FixedJoint>();
-            holdJoint.breakForce = holdBreakForce;
-            holdJoint.connectedBody = heldItem.rigidbody;
-        }   
     }
 
     public void Drop()
     {
         if (heldItem != null)
         {
-            heldItem.SetVelocity(Vector3.zero);
-            // heldItem.rigidbody.velocity = holdBody.velocity.normalized * Mathf.Min(20f, 2f * holdBody.velocity.magnitude / Time.fixedDeltaTime);
+            if (heldItem.rigidbody != null)
+            {
+                Vector3 velocity = heldItem.rigidbody.velocity;
+                if (velocity.magnitude > 10f)
+                {
+                    velocity = velocity.normalized * 10f;
+                }
+                heldItem.SetVelocity(velocity);
+            }
+
             heldItem.SetGravity(true);
             heldItem = null;
-            Destroy(holdJoint);
         }
     }
 
@@ -237,7 +237,7 @@ public class ItemInteraction : MonoBehaviour
         if (inventory != null)
         {
             Drop();
-            // item.SetActive(false);
+
             inventory.AddItem(item);
         }
     }

@@ -4,18 +4,37 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public CharacterController controller;
+    private new Rigidbody rigidbody;
     public float speed = 10f;
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-        // Get orientation
+        rigidbody = gameObject.GetComponent<Rigidbody>();
+    }
+
+    private Vector3 movement = new();
+
+    void FixedUpdate()
+    {
+
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
-        Vector3 movement = transform.right * x + transform.forward * z;
+        movement = transform.right * x + transform.forward * z;
+        if (movement.magnitude > 1)
+        {
+            movement = movement.normalized;
+        }
 
-        controller.Move(movement * speed * Time.deltaTime);
+        rigidbody.AddForce(movement * speed * 10f, ForceMode.Force);
+        
+        Vector3 flatVelocity = new(rigidbody.velocity.x, 0, rigidbody.velocity.z);
+        if (flatVelocity.magnitude > speed)
+        {
+            Vector3 velocity = flatVelocity.normalized * speed;
+            velocity.y = rigidbody.velocity.y;
+            rigidbody.velocity = velocity;
+        }
+
     }
 }
