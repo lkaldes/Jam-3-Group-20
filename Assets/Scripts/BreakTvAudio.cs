@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class BreakTvAudio : MonoBehaviour
 {
-    
-    public AudioSource tvBreaking;
+    public AudioClip tvStatic;
+    public AudioClip tvBreaking;
+    public AudioSource audios;
     // Start is called before the first frame update
     void Start()
     {
-        tvBreaking = GetComponent<AudioSource>();
+        audios = GetComponent<AudioSource>();
+        audios.Play();
+        audios.clip = tvBreaking;
+        // AudioSource.Play(staticClip);
     }
 
     // Update is called once per frame
@@ -25,8 +29,12 @@ public class BreakTvAudio : MonoBehaviour
         if (collision.gameObject.tag == "Target")
         {   
             Debug.Log("collision");
+
             //If the GameObject's name matches the one you suggest, play TV breaking audio
-            tvBreaking.Play();
+            // audios.Play();
+            // AudioSource.Stop(staticClip);
+            // AudioSource.PlayOneShot(breakingClip);
+            audios.PlayOneShot(tvBreaking, 1F);
 
         }
     }
