@@ -23,6 +23,8 @@ public class EventManager
         }
     }
 
+    public object[]? Args {get; private set;}
+
     private class Event
     {
         private class EventCallback
@@ -37,9 +39,10 @@ public class EventManager
 
             public void Call()
             {
-                callback.DynamicInvoke();
+                callback.Invoke();
             }
         }
+        private object[]? lastArgs;
         private string name;
         private List<EventCallback> callbacks;
         public Event(string name)
@@ -53,8 +56,9 @@ public class EventManager
             callbacks.Add(new EventCallback(callback, once));
         }
 
-        public void Call()
+        public void Call(object[] args)
         {
+            lastArgs = args;
             for (int i = 0; i < callbacks.Count; i++)
             {
                 EventCallback callback = callbacks[i];
@@ -87,6 +91,7 @@ public class EventManager
             }
         }
     }
+    
 
     private readonly Dictionary<string, Event> eventMap = new();
 
@@ -125,11 +130,13 @@ public class EventManager
         return this;
     }
 
-    public EventManager Trigger(string eventName)
+    public EventManager Trigger(string eventName, params object[] args)
     {
         if (eventMap.ContainsKey(eventName))
         {
-            eventMap[eventName].Call();
+            Args = args;
+            eventMap[eventName].Call(args);
+            Args = null;
         }
         return this;
     }
