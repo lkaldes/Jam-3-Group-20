@@ -6,12 +6,12 @@ public class NewBehaviourScript : MonoBehaviour
 {
     public string EventID;
     // Start is called before the first frame update
-    public EventManager Events {get;}
+    
 
 
     void Start()
     {
-        Events.On(EventID,PuzzleSolved,false);
+        EventManager.Events.On(EventID,PuzzleSolved,false);
 
         
     }
@@ -23,7 +23,7 @@ public class NewBehaviourScript : MonoBehaviour
     }
     //Cleans up after itself once solved.
     void PuzzleSolved(){
-        Events.Off(EventID,PuzzleSolved);
+        EventManager.Events.Off(EventID,PuzzleSolved);
 
          //Insert movement code
     }

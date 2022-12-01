@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//Use this to test stuff
 public class AreaTrigger : MonoBehaviour
 {
    // public static EventManager Events {get;}
@@ -18,7 +18,7 @@ public class AreaTrigger : MonoBehaviour
     }
 
      private void OnTriggerEnter(Collider other){
-        Debug.Log("hello");
+        
         EventManager.Events.Trigger("duddy");
        
     }
