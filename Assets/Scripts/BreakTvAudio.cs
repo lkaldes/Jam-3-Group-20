@@ -19,7 +19,7 @@ public class BreakTvAudio : MonoBehaviour
     }
 
     //Detect collisions between the GameObjects with Colliders attached
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider collision)
     {
         //Check for a match with the specified name on any GameObject that collides with your GameObject
         if (collision.gameObject.tag == "Target")
