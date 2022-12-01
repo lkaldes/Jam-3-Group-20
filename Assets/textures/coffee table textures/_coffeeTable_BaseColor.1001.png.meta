@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream
 guid: bab70a5be186b574c904451b95abccb0
+=======
+<<<<<<< Updated upstream:Assets/textures/coffee table textures/_coffeeTable_Emission.1001.png.meta
+guid: 472f17032fe9a8843aa58e38103a0c75
+=======
+guid: bab70a5be186b574c904451b95abccb0
+>>>>>>> Stashed changes:Assets/textures/coffee table textures/_coffeeTable_BaseColor.1001.png.meta
+>>>>>>> Stashed changes
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

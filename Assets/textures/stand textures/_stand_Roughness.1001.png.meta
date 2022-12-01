@@ -1,13 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream:Assets/textures/coffee table textures/_coffeeTable_Displacement.1001.png.meta
-guid: 3b926a28d7b56a9479d859d1aaf6de77
-=======
-guid: 2050ef82023710d42be7ce7dc65d2ba4
->>>>>>> Stashed changes:Assets/textures/coffee table textures/_coffeeTable_Alpha.1001.png.meta
-=======
-guid: 3b926a28d7b56a9479d859d1aaf6de77
->>>>>>> Stashed changes
+guid: 93cb5dbe1a6b0434097df304b215aad2
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
