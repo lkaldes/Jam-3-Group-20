@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3386,8 +3386,8 @@ GameObject:
   - component: {fileID: 556375180}
   - component: {fileID: 556375179}
   - component: {fileID: 556375178}
-  - component: {fileID: 556375182}
   - component: {fileID: 556375183}
+  - component: {fileID: 556375182}
   m_Layer: 0
   m_Name: puzzleSymbol
   m_TagString: Target
@@ -3514,7 +3514,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 556375176}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -3581,7 +3581,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fdac58664ae03a428307e128096d257, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tvStatic: {fileID: 0}
   tvBreaking: {fileID: 0}
+  audios: {fileID: 0}
 --- !u!82 &556375183
 AudioSource:
   m_ObjectHideFlags: 0
