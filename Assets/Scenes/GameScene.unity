@@ -2023,7 +2023,7 @@ GameObject:
   - component: {fileID: 367445684}
   - component: {fileID: 367445683}
   - component: {fileID: 367445682}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FirstPersonCam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2139,7 +2139,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 535
+    m_Bits: 791
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -5092,7 +5092,7 @@ GameObject:
   - component: {fileID: 750516839}
   - component: {fileID: 750516838}
   - component: {fileID: 750516841}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5751,7 +5751,7 @@ GameObject:
   - component: {fileID: 957828644}
   - component: {fileID: 957828645}
   - component: {fileID: 957828646}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FirstPersonPlayer
   m_TagString: Target
   m_Icon: {fileID: 0}
