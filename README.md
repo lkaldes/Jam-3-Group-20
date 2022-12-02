@@ -21,4 +21,4 @@ Helped with BreakTvAudio.cs/Static Puzzle, Modified LightFlickerEffect.cs
 
 - Matthew Chen: Inventory system, Picking up items, Event system, Light puzzle, Lighting
 
-- Nicolas Stepp: 
+- Nicolas Stepp: Texturing Assets, 3D Modeling, UV Mapping, helped production
