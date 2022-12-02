@@ -7,12 +7,14 @@ public class BreakTvAudio : MonoBehaviour
     public AudioClip tvStatic;
     public AudioClip tvBreaking;
     public AudioSource audios;
+
+    public bool broken = false;
     // Start is called before the first frame update
     void Start()
     {
         audios = GetComponent<AudioSource>();
         audios.Play();
-        audios.clip = tvBreaking;
+        // audios.clip = tvBreaking;
         // AudioSource.Play(staticClip);
     }
 
@@ -26,7 +28,7 @@ public class BreakTvAudio : MonoBehaviour
     void OnTriggerEnter(Collider collision)
     {
         //Check for a match with the specified name on any GameObject that collides with your GameObject
-        if (collision.gameObject.tag == "Target")
+        if ((collision.gameObject.tag == "Target") && (broken == false))
         {   
             Debug.Log("collision");
 
@@ -34,7 +36,9 @@ public class BreakTvAudio : MonoBehaviour
             // audios.Play();
             // AudioSource.Stop(staticClip);
             // AudioSource.PlayOneShot(breakingClip);
+            audios.clip = tvBreaking;
             audios.PlayOneShot(tvBreaking, 1F);
+            broken = true;
 
         }
     }
