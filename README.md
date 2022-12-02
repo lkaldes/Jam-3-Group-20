@@ -10,7 +10,8 @@ A creepy horror puzzle game taking place in a small home. But there is something
 
 - Benjamin Quang: 
 
-- Daniel Wild: 
+- Daniel Wild: DoorScript.cs, AreaTrigger.cs, BedroomLocks.cs Voice of Creature,  
+Helped with BreakTvAudio.cs/Static Puzzle, Modified LightFlickerEffect.cs
 
 - Jennifer To: 
 
