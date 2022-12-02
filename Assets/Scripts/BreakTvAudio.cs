@@ -6,8 +6,10 @@ public class BreakTvAudio : MonoBehaviour
 {
     public AudioClip tvStatic;
     public AudioClip tvBreaking;
+    public Light tvLight;
     public AudioSource audios;
 
+    private float initialIntensity = 0;
     public bool broken = false;
     // Start is called before the first frame update
     void Start()
@@ -16,12 +18,16 @@ public class BreakTvAudio : MonoBehaviour
         audios.Play();
         // audios.clip = tvBreaking;
         // AudioSource.Play(staticClip);
+        initialIntensity = tvLight.intensity;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (!broken)
+        {
+            tvLight.intensity = initialIntensity - Mathf.Sin(Time.time * 10f) * 20f;
+        }
     }
 
     //Detect collisions between the GameObjects with Colliders attached
@@ -39,6 +45,8 @@ public class BreakTvAudio : MonoBehaviour
             audios.clip = tvBreaking;
             audios.PlayOneShot(tvBreaking, 1F);
             broken = true;
+
+            tvLight.intensity = 0;
 
         }
     }
