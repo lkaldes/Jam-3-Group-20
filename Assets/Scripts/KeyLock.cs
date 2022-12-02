@@ -17,18 +17,6 @@ public class KeyLock : MonoBehaviour
 
     public UnityEvent onUnlock;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void OnCollisionEnter(Collision collision)
     {
         if (locked && key != null && collision.collider == key)
@@ -40,5 +28,6 @@ public class KeyLock : MonoBehaviour
     void Unlock()
     {
         onUnlock.Invoke();
+        EventManager.Events.Trigger("closetLockUnlocked");
     }
 }
