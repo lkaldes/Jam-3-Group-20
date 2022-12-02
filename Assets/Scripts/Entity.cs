@@ -20,17 +20,20 @@ public class Entity : MonoBehaviour
     private bool three = false;
     private bool four = false;
 
+    // Starting Position
     void Start()
     {
         this.transform.position = new Vector3(-45, 0.5f, -78);
         this.transform.rotation = Quaternion.Euler(-90, 90, 0);
     }
 
+    // Keypad Function calls this to trigger entity
     public void KitchenDoor()
     {
         moving = true;
     }
 
+    // wait 10 seconds after initial to begin roaming
     IEnumerator Going()
     {
         yield return new WaitForSeconds(10.0f);
@@ -38,13 +41,14 @@ public class Entity : MonoBehaviour
         randomactive = true;
     }
 
+    // wait 30-60 seconds before deciding where to roam next
     IEnumerator Roaming(float time)
     {
         randomactive = false;
         yield return new WaitForSeconds(time);
         Debug.Log("Waited 2!");
-        int placement = Random.Range(0, 4);
-        //int placement = 4;
+        int placement = Random.Range(0, 5);
+        // placements 0-4 are different paths to start and be activated
         if (placement == 0 && player.transform.position.x < -7 && player.transform.position.z < -73)
         {
             Debug.Log("zero");
@@ -104,7 +108,7 @@ public class Entity : MonoBehaviour
             StartCoroutine(Roaming(Random.Range(30.0f, 60.0f)));
         }
 
-        // move script for each place
+        // move script for each place (each goes like: move forwards and turn at specified points then go away at end)
         if (zero)
         {
             this.transform.Translate(Vector3.down * speed * Time.deltaTime);
