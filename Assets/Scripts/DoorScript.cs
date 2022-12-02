@@ -38,7 +38,8 @@ public class DoorScript : MonoBehaviour
             EventTotal-=1;
         
             return;
-        }
+        } 
+        
         EventManager.Events.Off(EventID,OpenDoor);
      
         StartCoroutine(SmoothTurn());
