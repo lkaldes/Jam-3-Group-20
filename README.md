@@ -19,6 +19,6 @@ Helped with BreakTvAudio.cs/Static Puzzle, Modified LightFlickerEffect.cs
 
 - Liam Kaldes: Menu UI & Pause Mechanics, Padlock UI & Puzzle Mechanics, 4 Digit Lock UI & Puzzle Mechanics, Entity Movement
 
-- Matthew Chen: Inventory system, Picking up items, Event system, Light puzzle, Lighting, Popup UI system
+- Matthew Chen: Inventory system, Picking up items, Event system, Light puzzle, Lighting
 
 - Nicolas Stepp: 
