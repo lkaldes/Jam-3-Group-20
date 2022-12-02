@@ -27,7 +27,7 @@ public class LightFlickerEffect : MonoBehaviour {
 
     public string TurnOnEvent;
     public string TurnOffEvent;
-    public bool StartOff;
+    public bool StartOff,NoFlicker;
     private float maxSave;
 
     // Continuous average calculation via FIFO queue
@@ -75,7 +75,7 @@ void LightOn(){
     }
 
     void Update() {
-        if (light == null)
+        if (light == null || NoFlicker == true); 
             return;
 
         // pop off an item if too big
