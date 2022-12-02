@@ -46,7 +46,7 @@ public class Entity : MonoBehaviour
     {
         randomactive = false;
         yield return new WaitForSeconds(time);
-        Debug.Log("Waited 2!");
+        // Debug.Log("Waited 2!");
         int placement = Random.Range(0, 5);
         // placements 0-4 are different paths to start and be activated
         if (placement == 0 && player.transform.position.x < -7 && player.transform.position.z < -73)
