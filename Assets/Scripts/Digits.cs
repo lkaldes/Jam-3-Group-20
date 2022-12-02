@@ -76,7 +76,7 @@ public class Digits : MonoBehaviour
         secondtxt.text = second.ToString();
         thirdtxt.text = third.ToString();
         fourthtxt.text = fourth.ToString();
-        if (first == 1 && second == 3 && third == 3 && fourth == 7)
+        if (first == 6 && second == 1 && third == 4 && fourth == 2)
         {
             OnUnlock();
         }
