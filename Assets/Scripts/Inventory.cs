@@ -155,15 +155,21 @@ public class Inventory : MonoBehaviour
             item.SetAngularVelocity(Vector3.zero);
             item.gameObject.transform.rotation = Quaternion.identity;
 
+            Renderer? renderer = item.gameObject.GetComponent<Renderer>();
+            if (renderer == null)
+            {
+                renderer = item.gameObject.GetComponentInChildren<Renderer>();
+            }
+
             if (index == 0)
             {
-                Vector3 extents = item.gameObject.GetComponent<Renderer>().bounds.extents;
+                Vector3 extents = renderer.bounds.extents;
                 fitProgress.x = extents.x - canvasSize.x / 2f + padding;
                 fitProgress.y = canvasSize.y / 2f - extents.y - padding;
             }
 
             item.gameObject.transform.position = fitProgress;
-            fitProgress.x += item.gameObject.GetComponent<Renderer>().bounds.size.x + gap;
+            fitProgress.x += renderer.bounds.size.x + gap;
             // item.SetCollisions(true);
 
             index += 1;

@@ -7,6 +7,10 @@ public class Door : MonoBehaviour
     public Vector3 closedRotation = new();
     public Vector3 openRotation = new();
 
+    [Header("Auto open when all prerequisites are checked")]
+    public bool openOnPrerequisites = false;
+    public List<bool> prerequisites = new();
+
     public AudioClip doorSound;
     private AudioSource audioSource = new();
 
@@ -64,6 +68,25 @@ public class Door : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            if (openOnPrerequisites && state == State.Closed)
+            {
+                bool pass = true;
+                foreach (bool value in prerequisites)
+                {
+                    if (!value)
+                    {
+                        pass = false;
+                        break;
+                    }
+                }
+                if (pass)
+                {
+                    Open();
+                }
+            }
+        }
 
         gameObject.transform.rotation = Quaternion.Euler(currentRotation);
     }
@@ -93,6 +116,14 @@ public class Door : MonoBehaviour
             {
                 audioSource.Play();
             }
+        }
+    }
+
+    public void EnablePrerequisite(int index)
+    {
+        if (index >= 0 && index < prerequisites.Count)
+        {
+            prerequisites[index] = true;
         }
     }
 }
