@@ -18,6 +18,6 @@ A creepy horror puzzle game taking place in a small home. But there is something
 
 - Liam Kaldes: Menu UI & Pause Mechanics, Padlock UI & Puzzle Mechanics, 4 Digit Lock UI & Puzzle Mechanics, Entity Movement
 
-- Matthew Chen: 
+- Matthew Chen: Inventory system, Picking up items, Event system, Light puzzle, Lighting
 
 - Nicolas Stepp: 
