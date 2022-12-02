@@ -4,7 +4,7 @@ A creepy horror puzzle game taking place in a small home. But there is something
 
 ## Credits
 
-- Aaron Gonzales: 
+- Aaron Gonzales: Player movement, Scene Design, Audio Design
 
 - Amanda Bahadori: 
 
