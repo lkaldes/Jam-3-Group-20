@@ -15,7 +15,7 @@ Helped with BreakTvAudio.cs/Static Puzzle, Modified LightFlickerEffect.cs
 
 - Jennifer To: 
 
-- Julie Khou: 
+- Julie Khou: BreakTvAudio.cs/Static Puzzle Implementation, Puzzle Design, Audio Design, Scene Design
 
 - Liam Kaldes: Menu UI & Pause Mechanics, Padlock UI & Puzzle Mechanics, 4 Digit Lock UI & Puzzle Mechanics, Entity Movement
 
