@@ -22,8 +22,8 @@ public class Entity : MonoBehaviour
 
     void Start()
     {
-        this.transform.position = new Vector3(-42, 2, -78);
-        this.transform.rotation = Quaternion.Euler(0, 90, 0);
+        this.transform.position = new Vector3(-45, 0.5f, -78);
+        this.transform.rotation = Quaternion.Euler(-90, 90, 0);
     }
 
     public void KitchenDoor()
@@ -48,36 +48,36 @@ public class Entity : MonoBehaviour
         if (placement == 0 && player.transform.position.x < -7 && player.transform.position.z < -73)
         {
             Debug.Log("zero");
-            this.transform.position = new Vector3(26, 2, -78);
-            this.transform.rotation = Quaternion.Euler(0, -90, 0);
+            this.transform.position = new Vector3(26, 0.5f, -78);
+            this.transform.rotation = Quaternion.Euler(-90, -90, 0);
             zero = true;
         }
         else if (placement == 1 && player.transform.position.x > 10 && player.transform.position.z > -92)
         {
             Debug.Log("one");
-            this.transform.position = new Vector3(-2, 2, -53);
-            this.transform.rotation = Quaternion.Euler(0, 180, 0);
+            this.transform.position = new Vector3(-2, 0.5f, -53);
+            this.transform.rotation = Quaternion.Euler(-90, 180, 0);
             one = true;
         }
         else if (placement == 2 && player.transform.position.z > -90 && player.transform.position.x < -12)
         {
             Debug.Log("two");
-            this.transform.position = new Vector3(-12, 2, -113);
-            this.transform.rotation = Quaternion.Euler(0, 0, 0);
+            this.transform.position = new Vector3(-12, 0.5f, -113);
+            this.transform.rotation = Quaternion.Euler(-90, 0, 0);
             two = true;
         }
         else if (placement == 3 && player.transform.position.z > -72)
         {
             Debug.Log("three");
-            this.transform.position = new Vector3(40, 2, -78);
-            this.transform.rotation = Quaternion.Euler(0, -90, 0);
+            this.transform.position = new Vector3(40, 0.5f, -78);
+            this.transform.rotation = Quaternion.Euler(-90, -90, 0);
             three = true;
         }
         else if (placement == 4 && (player.transform.position.x < -15 || player.transform.position.x > 4))
         {
             Debug.Log("four");
-            this.transform.position = new Vector3(-19, 2, -108);
-            this.transform.rotation = Quaternion.Euler(0, 20, 0);
+            this.transform.position = new Vector3(-19, 0.5f, -108);
+            this.transform.rotation = Quaternion.Euler(-90, 20, 0);
             four = true;
         }
         else
@@ -89,7 +89,7 @@ public class Entity : MonoBehaviour
     void Update()
     {
         // move forward
-        if (moving) this.transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        if (moving) this.transform.Translate(Vector3.down * speed * Time.deltaTime);
         // first encounter, disappear after going to bathroom, engage roaming
         if (this.transform.position.x > 40 && kitchen)
         {
@@ -107,9 +107,9 @@ public class Entity : MonoBehaviour
         // move script for each place
         if (zero)
         {
-            this.transform.Translate(Vector3.forward * speed * Time.deltaTime);
-            if (this.transform.position.x < -2) this.transform.rotation = Quaternion.Euler(0, 0, 0);
-            if (this.transform.position.z > -60) this.transform.rotation = Quaternion.Euler(0, 90, 0);
+            this.transform.Translate(Vector3.down * speed * Time.deltaTime);
+            if (this.transform.position.x < -2) this.transform.rotation = Quaternion.Euler(-90, 0, 0);
+            if (this.transform.position.z > -60) this.transform.rotation = Quaternion.Euler(-90, 90, 0);
             if (this.transform.position.x > 70) 
             {
                 this.transform.position = new Vector3(1000, 1000, 1000);
@@ -119,9 +119,9 @@ public class Entity : MonoBehaviour
         }
         else if (one)
         {
-            this.transform.Translate(Vector3.forward * speed * Time.deltaTime);
-            if (this.transform.position.z < -78) this.transform.rotation = Quaternion.Euler(0, -90, 0);
-            if (this.transform.position.x < -12) this.transform.rotation = Quaternion.Euler(0, 180, 0);
+            this.transform.Translate(Vector3.down * speed * Time.deltaTime);
+            if (this.transform.position.z < -78) this.transform.rotation = Quaternion.Euler(-90, -90, 0);
+            if (this.transform.position.x < -12) this.transform.rotation = Quaternion.Euler(-90, 180, 0);
             if (this.transform.position.z < -130) 
             {
                 this.transform.position = new Vector3(1000, 1000, 1000);
@@ -131,9 +131,9 @@ public class Entity : MonoBehaviour
         }
         else if (two)
         {
-            this.transform.Translate(Vector3.forward * speed * Time.deltaTime);
-            if (this.transform.position.z > -78) this.transform.rotation = Quaternion.Euler(0, 90, 0);
-            if (this.transform.position.x > 37) this.transform.rotation = Quaternion.Euler(0, 180, 0);
+            this.transform.Translate(Vector3.down * speed * Time.deltaTime);
+            if (this.transform.position.z > -78) this.transform.rotation = Quaternion.Euler(-90, 90, 0);
+            if (this.transform.position.x > 37) this.transform.rotation = Quaternion.Euler(-90, 180, 0);
             if (this.transform.position.z < -114) 
             {
                 this.transform.position = new Vector3(1000, 1000, 1000);
@@ -143,8 +143,8 @@ public class Entity : MonoBehaviour
         }
         else if (three)
         {
-            this.transform.Translate(Vector3.forward * speed * Time.deltaTime);
-            if (this.transform.position.x < -13) this.transform.rotation = Quaternion.Euler(0, 180, 0);
+            this.transform.Translate(Vector3.down * speed * Time.deltaTime);
+            if (this.transform.position.x < -13) this.transform.rotation = Quaternion.Euler(-90, 180, 0);
             if (this.transform.position.z < -125) 
             {
                 this.transform.position = new Vector3(1000, 1000, 1000);
@@ -154,7 +154,7 @@ public class Entity : MonoBehaviour
         }
         else if (four)
         {
-            this.transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            this.transform.Translate(Vector3.down * speed * Time.deltaTime);
             if (this.transform.position.z > -40) 
             {
                 this.transform.position = new Vector3(1000, 1000, 1000);
