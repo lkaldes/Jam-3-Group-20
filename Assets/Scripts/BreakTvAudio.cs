@@ -45,6 +45,7 @@ public class BreakTvAudio : MonoBehaviour
             audios.clip = tvBreaking;
             audios.PlayOneShot(tvBreaking, 1F);
             broken = true;
+           // EventManager.Events.Trigger("stage2puzzle");
 
             tvLight.intensity = 0;
 

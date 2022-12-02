@@ -5,18 +5,21 @@ using UnityEngine;
 public class DoorScript : MonoBehaviour
 {
     public string EventID;
-    public Vector3 PivotPoint,RotateAxis;
+    public Vector3 RotateAxis;
     public float OpenAngle;
     private int ticks = 60;
     private float anglepertick;
     // Start is called before the first frame update
-    
+    private Vector3 PivotPoint;
+    public int EventTotal;
 
 
     void Start()
     {
         EventManager.Events.On(EventID,OpenDoor,false);
+       
         anglepertick = OpenAngle/ticks;
+        PivotPoint = gameObject.transform.position;
       
         
 
@@ -30,9 +33,16 @@ public class DoorScript : MonoBehaviour
     }
     //Open sesame
     void OpenDoor(){
+        if(EventTotal>1){
+       
+            EventTotal-=1;
+        
+            return;
+        }
         EventManager.Events.Off(EventID,OpenDoor);
+     
         StartCoroutine(SmoothTurn());
-         //Insert movement code
+         
     }
     private IEnumerator SmoothTurn(){
         WaitForSeconds Stepper = new WaitForSeconds(1f/60);
