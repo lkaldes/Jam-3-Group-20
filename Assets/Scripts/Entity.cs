@@ -217,14 +217,17 @@ public class Entity : MonoBehaviour
         else if (killing)
         {
             this.transform.Translate(Vector3.forward * speed * Time.deltaTime);
-            if (this.transform.position.x < -3) this.transform.rotation = Quaternion.Euler(0, 180, 0);
-            if (this.transform.position.z < -69) 
+            if (this.transform.position.x < -3) 
             {
                 if (deathsoundplayed < 3)
                 {
                     deathsoundplayed++;
                     source.PlayOneShot(noise4);
                 }
+                this.transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+            if (this.transform.position.z < -69) 
+            {
                 this.transform.rotation = Quaternion.Euler(0, 145, 0);
                 speed = 25;
             }

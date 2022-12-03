@@ -77,8 +77,8 @@ public class MouseControl : MonoBehaviour
 
         if (ending2)
         {
-            if (this.transform.eulerAngles.x > 14) this.transform.Rotate(-0.03f, 0f, 0f);
-            if (playerBody.transform.eulerAngles.y < 320) playerBody.transform.Rotate(0f, 0.2f, 0f);
+            if (this.transform.eulerAngles.x > 14) this.transform.Rotate(-0.3f, 0f, 0f);
+            if (playerBody.transform.eulerAngles.y < 320) playerBody.transform.Rotate(0f, 0.9f, 0f);
         }
     }
 }
