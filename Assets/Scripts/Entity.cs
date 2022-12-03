@@ -6,11 +6,22 @@ public class Entity : MonoBehaviour
 {
     public GameObject player;
 
+    // Audio clips to play while moving
+    public AudioSource source;
+    public AudioClip noise0;
+    public AudioClip noise1;
+    public AudioClip noise2;
+    public AudioClip noise3;
+    public AudioClip noise4;
+    public AudioClip noise5;
+    private AudioClip currNoise;
+
     public float speed = 50;
 
     private bool moving = false;
     private bool kitchen = true;
     private bool randomactive = false;
+    private bool firstSoundPlayed = false;
 
 
     // bools of location spots
@@ -25,6 +36,7 @@ public class Entity : MonoBehaviour
     {
         this.transform.position = new Vector3(-45, 0.5f, -78);
         this.transform.rotation = Quaternion.Euler(0, 90, 0);
+        currNoise = noise1;
     }
 
     // Keypad Function calls this to trigger entity
@@ -45,6 +57,8 @@ public class Entity : MonoBehaviour
     IEnumerator Roaming(float time)
     {
         randomactive = false;
+        // Play audio
+        source.PlayOneShot(currNoise);
         yield return new WaitForSeconds(time);
         // Debug.Log("Waited 2!");
         int placement = Random.Range(0, 5);
@@ -93,7 +107,15 @@ public class Entity : MonoBehaviour
     void Update()
     {
         // move forward
-        if (moving) this.transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        if (moving)
+        { 
+            this.transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            if (!firstSoundPlayed)
+            {
+                firstSoundPlayed = true;
+                source.PlayOneShot(noise0);
+            }
+        }
         // first encounter, disappear after going to bathroom, engage roaming
         if (this.transform.position.x > 40 && kitchen)
         {
@@ -111,6 +133,7 @@ public class Entity : MonoBehaviour
         // move script for each place (each goes like: move forwards and turn at specified points then go away at end)
         if (zero)
         {
+            currNoise = noise1; // Change sound that will play when monster moves
             this.transform.Translate(Vector3.forward * speed * Time.deltaTime);
             if (this.transform.position.x < -2) this.transform.rotation = Quaternion.Euler(0, 0, 0);
             if (this.transform.position.z > -60) this.transform.rotation = Quaternion.Euler(0, 90, 0);
@@ -123,6 +146,7 @@ public class Entity : MonoBehaviour
         }
         else if (one)
         {
+            currNoise = noise2; // Change sound that will play when monster moves
             this.transform.Translate(Vector3.forward * speed * Time.deltaTime);
             if (this.transform.position.z < -78) this.transform.rotation = Quaternion.Euler(0, -90, 0);
             if (this.transform.position.x < -12) this.transform.rotation = Quaternion.Euler(0, 180, 0);
@@ -135,6 +159,7 @@ public class Entity : MonoBehaviour
         }
         else if (two)
         {
+            currNoise = noise3; // Change sound that will play when monster moves
             this.transform.Translate(Vector3.forward * speed * Time.deltaTime);
             if (this.transform.position.z > -78) this.transform.rotation = Quaternion.Euler(0, 90, 0);
             if (this.transform.position.x > 37) this.transform.rotation = Quaternion.Euler(0, 180, 0);
@@ -147,6 +172,7 @@ public class Entity : MonoBehaviour
         }
         else if (three)
         {
+            currNoise = noise4; // Change sound that will play when monster moves
             this.transform.Translate(Vector3.forward * speed * Time.deltaTime);
             if (this.transform.position.x < -13) this.transform.rotation = Quaternion.Euler(0, 180, 0);
             if (this.transform.position.z < -125) 
@@ -158,6 +184,7 @@ public class Entity : MonoBehaviour
         }
         else if (four)
         {
+            currNoise = noise5; // Change sound that will play when monster moves
             this.transform.Translate(Vector3.forward * speed * Time.deltaTime);
             if (this.transform.position.z > -40) 
             {
