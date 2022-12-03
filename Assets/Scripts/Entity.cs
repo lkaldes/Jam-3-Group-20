@@ -22,7 +22,7 @@ public class Entity : MonoBehaviour
     private bool kitchen = true;
     private bool randomactive = false;
     private bool firstSoundPlayed = false;
-
+    private int deathsoundplayed = 0;
 
     // bools of location spots
     private bool zero = false;
@@ -30,6 +30,7 @@ public class Entity : MonoBehaviour
     private bool two = false;
     private bool three = false;
     private bool four = false;
+    private bool killing = false;
 
     // Starting Position
     void Start()
@@ -45,6 +46,22 @@ public class Entity : MonoBehaviour
         moving = true;
     }
 
+    public void ending()
+    {
+        randomactive = false;
+        this.transform.position = new Vector3(14, 0.5f, -59);
+        this.transform.rotation = Quaternion.Euler(0, -90, 0);
+        StartCoroutine(killingtime());
+    }
+
+    IEnumerator killingtime()
+    {
+        source.PlayOneShot(noise0);
+        yield return new WaitForSeconds(6.0f);
+        speed = 10;
+        killing = true;
+    }
+
     // wait 10 seconds after initial to begin roaming
     IEnumerator Going()
     {
@@ -57,8 +74,6 @@ public class Entity : MonoBehaviour
     IEnumerator Roaming(float time)
     {
         randomactive = false;
-        // Play audio
-        source.PlayOneShot(currNoise);
         yield return new WaitForSeconds(time);
         // Debug.Log("Waited 2!");
         int placement = Random.Range(0, 5);
@@ -66,6 +81,8 @@ public class Entity : MonoBehaviour
         if (placement == 0 && player.transform.position.x < -7 && player.transform.position.z < -73)
         {
             Debug.Log("zero");
+            // Play audio
+            source.PlayOneShot(noise1);
             this.transform.position = new Vector3(26, 0.5f, -78);
             this.transform.rotation = Quaternion.Euler(0, -90, 0);
             zero = true;
@@ -73,6 +90,8 @@ public class Entity : MonoBehaviour
         else if (placement == 1 && player.transform.position.x > 10 && player.transform.position.z > -92)
         {
             Debug.Log("one");
+            // Play audio
+            source.PlayOneShot(noise2);
             this.transform.position = new Vector3(-2, 0.5f, -53);
             this.transform.rotation = Quaternion.Euler(0, 180, 0);
             one = true;
@@ -80,6 +99,8 @@ public class Entity : MonoBehaviour
         else if (placement == 2 && player.transform.position.z > -90 && player.transform.position.x < -12)
         {
             Debug.Log("two");
+            // Play audio
+            source.PlayOneShot(noise3);
             this.transform.position = new Vector3(-12, 0.5f, -113);
             this.transform.rotation = Quaternion.Euler(0, 0, 0);
             two = true;
@@ -87,6 +108,8 @@ public class Entity : MonoBehaviour
         else if (placement == 3 && player.transform.position.z > -72)
         {
             Debug.Log("three");
+            // Play audio
+            source.PlayOneShot(noise4);
             this.transform.position = new Vector3(40, 0.5f, -78);
             this.transform.rotation = Quaternion.Euler(0, -90, 0);
             three = true;
@@ -94,6 +117,8 @@ public class Entity : MonoBehaviour
         else if (placement == 4 && (player.transform.position.x < -15 || player.transform.position.x > 4))
         {
             Debug.Log("four");
+            // Play audio
+            source.PlayOneShot(noise5);
             this.transform.position = new Vector3(-19, 0.5f, -108);
             this.transform.rotation = Quaternion.Euler(0, 20, 0);
             four = true;
@@ -133,7 +158,6 @@ public class Entity : MonoBehaviour
         // move script for each place (each goes like: move forwards and turn at specified points then go away at end)
         if (zero)
         {
-            currNoise = noise1; // Change sound that will play when monster moves
             this.transform.Translate(Vector3.forward * speed * Time.deltaTime);
             if (this.transform.position.x < -2) this.transform.rotation = Quaternion.Euler(0, 0, 0);
             if (this.transform.position.z > -60) this.transform.rotation = Quaternion.Euler(0, 90, 0);
@@ -146,7 +170,6 @@ public class Entity : MonoBehaviour
         }
         else if (one)
         {
-            currNoise = noise2; // Change sound that will play when monster moves
             this.transform.Translate(Vector3.forward * speed * Time.deltaTime);
             if (this.transform.position.z < -78) this.transform.rotation = Quaternion.Euler(0, -90, 0);
             if (this.transform.position.x < -12) this.transform.rotation = Quaternion.Euler(0, 180, 0);
@@ -159,7 +182,6 @@ public class Entity : MonoBehaviour
         }
         else if (two)
         {
-            currNoise = noise3; // Change sound that will play when monster moves
             this.transform.Translate(Vector3.forward * speed * Time.deltaTime);
             if (this.transform.position.z > -78) this.transform.rotation = Quaternion.Euler(0, 90, 0);
             if (this.transform.position.x > 37) this.transform.rotation = Quaternion.Euler(0, 180, 0);
@@ -172,7 +194,6 @@ public class Entity : MonoBehaviour
         }
         else if (three)
         {
-            currNoise = noise4; // Change sound that will play when monster moves
             this.transform.Translate(Vector3.forward * speed * Time.deltaTime);
             if (this.transform.position.x < -13) this.transform.rotation = Quaternion.Euler(0, 180, 0);
             if (this.transform.position.z < -125) 
@@ -191,6 +212,26 @@ public class Entity : MonoBehaviour
                 this.transform.position = new Vector3(1000, 1000, 1000);
                 randomactive = true;
                 four = false;
+            }
+        }
+        else if (killing)
+        {
+            this.transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            if (this.transform.position.x < -3) this.transform.rotation = Quaternion.Euler(0, 180, 0);
+            if (this.transform.position.z < -69) 
+            {
+                if (deathsoundplayed < 3)
+                {
+                    deathsoundplayed++;
+                    source.PlayOneShot(noise4);
+                }
+                this.transform.rotation = Quaternion.Euler(0, 145, 0);
+                speed = 25;
+            }
+            if (this.transform.position.z < -78) 
+            {
+                Debug.Log("Application Quit");
+                Application.Quit();
             }
         }
     }

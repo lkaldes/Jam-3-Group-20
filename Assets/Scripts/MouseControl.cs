@@ -17,6 +17,8 @@ public class MouseControl : MonoBehaviour
     public Inventory Inventory;
     public Rigidbody playerBody;
     public bool lockstate;          // Bool state on whether mouse is locked or not
+    private bool ending = false;             // Bool state on whether end kill is happening or not
+    private bool ending2 = false;
     float rotationX = 0f;
 
     // Start is called before the first frame update
@@ -32,12 +34,28 @@ public class MouseControl : MonoBehaviour
         sensitivity = val;
     }
 
+    public void endingsequence()
+    {
+        ending = true;
+        playerBody.transform.position = new Vector3(5.84f, 4f, -81f);
+        playerBody.transform.rotation = Quaternion.Euler(0f, 183f, 0);
+        this.transform.localRotation = Quaternion.Euler(30.66f, 0f, 0f);
+        StartCoroutine(turnaround());
+    }
+
+    IEnumerator turnaround()
+    {
+        yield return new WaitForSeconds(2);
+        playerBody.transform.position = new Vector3(5.84f, 4f, -81f);
+        ending2 = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
         
         // Move Camera on Y axis or player model on X axis if cursor is locked
-        if (Cursor.lockState == CursorLockMode.Locked)
+        if (Cursor.lockState == CursorLockMode.Locked && !ending)
         {
             // Get current mouse coordinates
             float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
@@ -51,10 +69,16 @@ public class MouseControl : MonoBehaviour
         }
 
         // Pause/Unpause on Esc key
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !ending)
         {
             pausePopup?.SetActive(!pausePopup.Opened);
 
+        }
+
+        if (ending2)
+        {
+            if (this.transform.eulerAngles.x > 14) this.transform.Rotate(-0.03f, 0f, 0f);
+            if (playerBody.transform.eulerAngles.y < 320) playerBody.transform.Rotate(0f, 0.2f, 0f);
         }
     }
 }
